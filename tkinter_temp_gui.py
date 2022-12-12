@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import time
 from datetime import datetime
-from icvt_tinker_lib import *
+from source.icvt.tinkerforge_lib import *
 
 HOST = "localhost"
 PORT = 4223
@@ -11,9 +11,9 @@ UID_TC1 = "WR8" # UID of your Thermocouple Bricklet 2.0
 filename = "20221212_EthanH2OTest.dat"
 filename2 = "20221212_EthanH2OTest_Tcoupon.dat"
 
-from tinkerforge.ip_connection import IPConnection
-from tinkerforge.bricklet_thermocouple_v2 import BrickletThermocoupleV2
-from tinkerforge.bricklet_industrial_digital_out_4_v2 import BrickletIndustrialDigitalOut4V2
+from source.tinkerforge.ip_connection import IPConnection
+from source.tinkerforge.bricklet_thermocouple_v2 import BrickletThermocoupleV2
+from source.tinkerforge.bricklet_industrial_digital_out_4_v2 import BrickletIndustrialDigitalOut4V2
 
 def regler_loop():
 
