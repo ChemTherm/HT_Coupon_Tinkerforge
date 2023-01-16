@@ -6,7 +6,6 @@ from source.icvt.tinkerforge_lib import *
 
 HOST = "localhost"
 PORT = 4223
-UID_TC1 = "WR8" # UID of your Thermocouple Bricklet 2.0
 
 filename = "20221212_EthanH2OTest.dat"
 filename2 = "20221212_EthanH2OTest_Tcoupon.dat"

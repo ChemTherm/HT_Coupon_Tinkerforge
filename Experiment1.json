@@ -1,0 +1,19 @@
+{
+    "PATH":{
+        "SaveFile": "./Data",
+        "images": "./img/"
+    },
+    
+    "TKINTER":{
+        "background-color": "#F2F2F2",
+        "tabpadx": 50,
+        "font-size": 22        
+    },
+
+    "REACTOR":{
+        "Name": "High Temperature Coupon Reactor"
+    }
+
+
+
+}

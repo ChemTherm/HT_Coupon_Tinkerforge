@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from datetime import datetime
+import tkinter as tk
+from PIL import Image,ImageTk
 import time
 from tinkerforge.bricklet_thermocouple_v2 import BrickletThermocoupleV2
 from tinkerforge.bricklet_industrial_digital_out_4_v2 import BrickletIndustrialDigitalOut4V2
@@ -115,11 +117,35 @@ class MFC:
         self.Aout.set_enabled(False)
 
 
-#def cb_read_t(temperature):
- #   print("Temperature: " + str(temperature/100.0) + " °C")
+def set_ICVT_landingpage(config):
 
+    window = tk.Tk()
+    scrW = window.winfo_screenwidth()
+    scrH = window.winfo_screenheight()
+    window.geometry(str(scrW) + "x" + str(scrH))
+    window.title(config['REACTOR']['Name'])
+    #window.attributes('-fullscreen',True)
 
-# Callback function for temperature callback
-#def cb_temperature(temperature):
-#    print("Temperature: " + str(temperature/100.0) + " °C")
+    #----------- Images ----------- 
+    bg_image = ImageTk.PhotoImage(Image.open(config['PATH']['images'] + 'reactor_background.png').resize((scrW,scrH),Image.LANCZOS))
+    close_img = ImageTk.PhotoImage(Image.open(config['PATH']['images'] + 'close.png').resize((50,50),Image.LANCZOS))
+
+    # Background label
+    
+
+    lf_MFC = tk.LabelFrame(window, text='MFC Steuerung')
+    lf_MFC.grid(column=0, row=0, padx=5, pady=5)
+    Lable_MFC_N2= tk.Label(lf_MFC, text='MFC_N2 ')
+
+    #----------- Canvas ----------- 
+    canvas_bg = tk.Canvas(window, bg = config['TKINTER']['background-color'], width = scrW, height = scrH)
+
+    bg = canvas_bg.create_image(0,0, image = bg_image, anchor = tk.NW)
+    close_button_canvas = canvas_bg.create_image(scrW - 60, 10 , image = close_img, anchor = tk.NW)
+    canvas_bg.pack()
+    
+    return window
+
+def close_window(window):
+    window.destroy()
 
