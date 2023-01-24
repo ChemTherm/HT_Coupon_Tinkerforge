@@ -12,6 +12,11 @@
 
     "REACTOR":{
         "Name": "High Temperature Coupon Reactor"
+    },
+    "Zeitsteuerung":{
+        "t": [100, 300],  
+        "R1-T1": [300, 300],
+        "R1-T2": [800, 800]
     }
 
 

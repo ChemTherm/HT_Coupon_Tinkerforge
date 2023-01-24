@@ -1,2 +1,4 @@
+#pip install -r requirements.txt
 tinkerforge == 2.1.30
 Pillow == 9.4.0
+customtkinter == 5.0.5
