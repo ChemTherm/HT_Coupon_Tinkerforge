@@ -4,10 +4,14 @@ from datetime import datetime
 import tkinter as tk
 from PIL import Image,ImageTk
 import time
+from tinkerforge.ip_connection import IPConnection
 from tinkerforge.bricklet_thermocouple_v2 import BrickletThermocoupleV2
 from tinkerforge.bricklet_industrial_digital_out_4_v2 import BrickletIndustrialDigitalOut4V2
 from tinkerforge.bricklet_industrial_analog_out_v2 import BrickletIndustrialAnalogOutV2
 from tinkerforge.bricklet_analog_in_v3 import BrickletAnalogInV3
+from tinkerforge.bricklet_industrial_dual_analog_in_v2 import BrickletIndustrialDualAnalogInV2
+
+
 
 class regler:
     t_soll = 0
@@ -93,19 +97,28 @@ class tc:
 class MFC:
     UID = ''
     Voltage = 0
-    def cb_voltage(self,voltage):
-        self.Voltage = voltage
-        #print("Voltage: " + str(voltage/1000.0) + " V")
+    def cb_voltage(self,voltages):
+        print(self.AinName )
+        print("Voltage1: " + str(voltages[0]/1000.0) + " Voltage2: " + str(voltages[1]/1000.0))
+        #if self.channel == channel:
+            #self.Voltage = voltage/1.0
+            #print("Channel: " + str(channel) +" Voltage: " + str(voltage/1.0) + " mV")
 
-    def __init__(self,ipcon,ID_out,ID_in) -> None:
+    def __init__(self,ipcon,ID_out,ID_in,channel) -> None:
         self.UID = ID_out
         self.Aout = BrickletIndustrialAnalogOutV2(ID_out, ipcon)
-        self.Ain = BrickletAnalogInV3(ID_in, ipcon)
+        #self.Ain = BrickletAnalogInV3(ID_in, ipcon) old Version, not for Industrial Analog in
+        self.Ain = BrickletIndustrialDualAnalogInV2(ID_in, ipcon)
         self.Aout.set_voltage(0)
         self.Aout.set_enabled(True)
         self.Aout.set_out_led_status_config(0, 5000, 1)
-        self.Ain.register_callback(self.Ain.CALLBACK_VOLTAGE, self.cb_voltage)
-        self.Ain.set_voltage_callback_configuration(1000, False, "x", 0, 0)
+        self.Ain.register_callback(self.Ain.CALLBACK_ALL_VOLTAGES, self.cb_voltage)
+        self.AinName = ID_in + " " + str(channel )
+        self.channel = channel
+        #self.Ain.set_voltage_callback_configuration(1000, False, "x", 0, 0) old Version, not for Industrial Analog in
+        #self.Ain.set_voltage_callback_configuration(channel, 500, False, "x", 0, 0)
+        self.Ain.set_all_voltages_callback_configuration(500, False)
+        #self.Ain.set_voltage_callback_configuration(1, 500, False, "x", 0, 0)
         #self.obj.set_configuration(0,0)
 
 

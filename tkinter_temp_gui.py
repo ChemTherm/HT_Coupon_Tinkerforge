@@ -10,9 +10,9 @@ PORT = 4223
 filename = "20221212_EthanH2OTest.dat"
 filename2 = "20221212_EthanH2OTest_Tcoupon.dat"
 
-from source.tinkerforge.ip_connection import IPConnection
-from source.tinkerforge.bricklet_thermocouple_v2 import BrickletThermocoupleV2
-from source.tinkerforge.bricklet_industrial_digital_out_4_v2 import BrickletIndustrialDigitalOut4V2
+# from source.tinkerforge.ip_connection import IPConnection
+# from source.tinkerforge.bricklet_thermocouple_v2 import BrickletThermocoupleV2
+# from source.tinkerforge.bricklet_industrial_digital_out_4_v2 import BrickletIndustrialDigitalOut4V2
 
 def regler_loop():
 
@@ -20,6 +20,7 @@ def regler_loop():
         lable_t_ist_dict[tc_obj_name].config(text = str(tc_list[tc_obj_name].t)+"°C")
     # lable_t_ist_dict['T2'].config(text = str(tc_2.t)+"°C")
     
+    print("Voltage: " + str(MFC_N2.Voltage) + " mV")
     value_MFC_N2.config(text = str(MFC_N2.Voltage) + " mV") 
     value_MFC_Ethan.config(text = str(MFC_Ethan.Voltage) + " mV") 
     sFlag.config(text=str(saveflag))
@@ -106,9 +107,9 @@ ipcon = IPConnection() # Create IP connection
 ipcon.connect(HOST, PORT) # Connect to brickd
 # Don't use device before ipcon is connected
 
-MFC_N2 = MFC(ipcon, "ZuD", "Zmm")
+MFC_N2 = MFC(ipcon, "ZuC", "23UP",0)
 #MFC_Air = MFC(ipcon, "ZuD")
-MFC_Ethan = MFC(ipcon, "ZuC","Zmp")
+MFC_Ethan = MFC(ipcon, "ZuD","23UE",1)
 
 tc_1 = tc(ipcon, "WPK", typ='N') #A
 tc_2 = tc(ipcon, "WQY", typ='N') #B

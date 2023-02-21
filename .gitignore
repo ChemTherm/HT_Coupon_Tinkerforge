@@ -1,2 +1,6 @@
 
 venv/
+
+.vscode/settings.json
+
+source/icvt/__pycache__/tinkerforge_lib.cpython-38.pyc
