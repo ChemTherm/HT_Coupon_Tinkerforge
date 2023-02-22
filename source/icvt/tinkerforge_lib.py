@@ -98,10 +98,10 @@ class MFC:
     UID = ''
     Voltage = 0
     def cb_voltage(self,voltages):
-        print(self.AinName )
-        print("Voltage1: " + str(voltages[0]/1000.0) + " Voltage2: " + str(voltages[1]/1000.0))
+        #print(self.AinName )
+        #print("Voltage1: " + str(voltages[0]/1000.0) + " Voltage2: " + str(voltages[1]/1000.0))
         #if self.channel == channel:
-            #self.Voltage = voltage/1.0
+        self.Voltage = voltages[0]/1000.0
             #print("Channel: " + str(channel) +" Voltage: " + str(voltage/1.0) + " mV")
 
     def __init__(self,ipcon,ID_out,ID_in,channel) -> None:

@@ -109,7 +109,7 @@ ipcon.connect(HOST, PORT) # Connect to brickd
 
 MFC_N2 = MFC(ipcon, "ZuC", "23UP",0)
 #MFC_Air = MFC(ipcon, "ZuD")
-MFC_Ethan = MFC(ipcon, "ZuD","23UE",1)
+MFC_Ethan = MFC(ipcon, "Tj4","23UE",0)
 
 tc_1 = tc(ipcon, "WPK", typ='N') #A
 tc_2 = tc(ipcon, "WQY", typ='N') #B

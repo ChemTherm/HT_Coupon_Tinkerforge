@@ -16,7 +16,15 @@ def tk_loop():
     
     value_MFC_N2.config(text = str(MFC_N2.Voltage) + " mV") 
     value_MFC_Air.config(text = str(MFC_Air.Voltage) + " mV") 
-    value_MFC_Ethan.config(text = str(MFC_Ethan.Voltage) + " mV") 
+    #value_MFC_Ethan.config(text = str(MFC_Ethan.Voltage) + " mV") 
+    with open(filename, 'a') as f:
+        line = datetime.now().strftime("%H:%M:%S:\t")
+        for tc_obj_name in tc_list:
+            line += str(tc_list[tc_obj_name].t) + '\t'
+        for p_obj_name in patronen_list:
+            line += str(patronen_list[p_obj_name].pwroutput) + '\t'
+        line += '/n'
+        f.writelines(line)
 
     patrone_1.regeln()
     patrone_2.regeln()
@@ -55,6 +63,15 @@ def getdata():
     MFC_N2_soll = int(set_MFC_N2.get())
     MFC_N2.set(MFC_N2_soll)
 
+    MFC_Air_soll = int(set_MFC_Air.get())
+    MFC_Air.set(MFC_Air_soll)
+
+
+filename = "20230222_NewElectricTest.dat"
+
+with open(filename, 'w') as f:
+    headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8 \n"
+    f.writelines(headline)
 
 ''''
 ====================================
@@ -159,20 +176,20 @@ ipcon.connect(HOST, PORT) # Connect to brickd
 
 
 tc_1 = tc(ipcon, "WR8", typ='N') #A
-tc_2 = tc(ipcon, "WpL", typ='N') #B
-tc_3 = tc(ipcon, "WQp", typ='N') #C
-tc_4 = tc(ipcon, "WQC", typ='N') #D
-tc_5 = tc(ipcon, "WPM", typ='N') #E
-tc_6 = tc(ipcon, "WQY", typ='N') #F
-tc_7 = tc(ipcon, "WQT", typ='N') #G
+tc_2 = tc(ipcon, "WQp", typ='N') #B
+tc_3 = tc(ipcon, "WPM", typ='N') #C
+tc_4 = tc(ipcon, "23jX", typ='N') #D
+tc_5 = tc(ipcon, "WpL", typ='N') #E
+tc_6 = tc(ipcon, "WQC", typ='N') #F
+tc_7 = tc(ipcon, "WQY", typ='N') #G
 tc_8 = tc(ipcon, "WPK", typ='N') #H
 
 tc_list = {'T1':tc_1,'T2':tc_2,'T3':tc_3,'T4':tc_4,'T5':tc_5,'T6':tc_6,'T7':tc_7,'T8':tc_8}
 
-ido_1 = BrickletIndustrialDigitalOut4V2("TpA", ipcon)
-ido_2 = BrickletIndustrialDigitalOut4V2("TnQ", ipcon)
-ido_3 = BrickletIndustrialDigitalOut4V2("Tmw", ipcon)
-p_val = 0.005
+ido_1 = BrickletIndustrialDigitalOut4V2("TpP", ipcon)
+ido_2 = BrickletIndustrialDigitalOut4V2("Tq2", ipcon)
+ido_3 = BrickletIndustrialDigitalOut4V2("ToX", ipcon)
+p_val = 0.0005
 i_val = 0.00001
 
 patrone_1 = regler(ido_1,0,tc_1)
@@ -235,8 +252,8 @@ t_soll = {}
 
 
 MFC_N2 = MFC(ipcon, "ZuC", "23UP",0)
-MFC_Air = MFC(ipcon, "ZuD","23UP",1)
-MFC_Ethan = MFC(ipcon, "TiX","23U6",0)
+MFC_Air = MFC(ipcon, "Tj4","23U6",0)
+##MFC_Ethan = MFC(ipcon, "TiX","23U6",0)
     
 
 
@@ -257,7 +274,7 @@ patrone_7.stop()
 patrone_8.stop()
 MFC_N2.stop()
 MFC_Air.stop()
-MFC_Ethan.stop()
+#MFC_Ethan.stop()
 
 time.sleep(2)
 
