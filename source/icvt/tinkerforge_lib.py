@@ -92,7 +92,27 @@ class tc:
     def cb_read_t(self,temperature):
         #print("Temperature: " + str(temperature/100.0) + " °C")
         ##print(self.UID)
-        self.t = temperature/100    
+        self.t = temperature/100 
+
+class pressure:
+    def __init__(self,ipcon,ID_in,channel) -> None:
+        self.UID = ID_in
+        self.Ain = BrickletIndustrialDualAnalogInV2(ID_in, ipcon)
+        self.channel = channel
+
+    def get(self):
+        self.Voltage =self.Ain.get_voltage(self.channel)
+
+class TF_IndustrialDualAnalogIn:
+    Voltage = [0,0]
+    def cb_voltage(self,voltages):
+        self.Voltage = voltages/1000.0
+
+    def __init__(self,ipcon,ID_in) -> None:
+        self.obj = BrickletIndustrialDualAnalogInV2(ID_in, ipcon)
+        self.obj.register_callback(self.obj.CALLBACK_ALL_VOLTAGES, self.cb_voltage)
+        self.obj.set_all_voltages_callback_configuration(500, False)
+    
 
 class MFC:
     UID = ''

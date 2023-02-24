@@ -16,6 +16,14 @@ def tk_loop():
     
     value_MFC_N2.config(text = str(MFC_N2.Voltage) + " mV") 
     value_MFC_Air.config(text = str(MFC_Air.Voltage) + " mV") 
+    pressure1.get()
+    #pressure2.get()
+    #pressure3.get()
+    value_pressure1.config(text = str(pressure1.Voltage) + " mV") 
+    #value_pressure2.config(text = str(pressure2.Voltage) + " mV") 
+    #value_pressure3.config(text = str(pressure3.Voltage) + " mV") 
+
+
     #value_MFC_Ethan.config(text = str(MFC_Ethan.Voltage) + " mV") 
     with open(filename, 'a') as f:
         line = datetime.now().strftime("%H:%M:%S:\t")
@@ -67,7 +75,7 @@ def getdata():
     MFC_Air.set(MFC_Air_soll)
 
 
-filename = "20230222_NewElectricTest.dat"
+filename = "20230223_NewElectricTest.dat"
 
 with open(filename, 'w') as f:
     headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8 \n"
@@ -124,6 +132,28 @@ frame_MFC = tk.Frame(window, bg=config['TKINTER']['background-color'], bd=0, hei
 label_background = tk.Label(window,image=bg_image)
 label_background.place(x=0,y=0)
 label_background.lower()
+
+
+lf_pressure = tk.LabelFrame(window, text='Druck')
+lf_pressure.grid(column=3, row=2, padx=20, pady=20)
+lf_pressure.place(x= 1050,y= 400)
+
+Lable_pressure1= tk.Label(lf_pressure, text='Druck_1 ')
+Lable_pressure1.grid(column=0, row=0, ipadx=5, ipady=5)
+value_pressure1= tk.Label(lf_pressure, text='NaN mV')
+value_pressure1.grid(column=1, row=0, ipadx=5, ipady=5)
+
+Lable_pressure2= tk.Label(lf_pressure, text='Druck_2 ')
+Lable_pressure2.grid(column=0, row=1, ipadx=5, ipady=5)
+value_pressure2= tk.Label(lf_pressure, text='NaN mV')
+value_pressure2.grid(column=1, row=1, ipadx=5, ipady=5)
+
+Lable_pressure3= tk.Label(lf_pressure, text='Druck_3 ')
+Lable_pressure3.grid(column=0, row=2, ipadx=5, ipady=5)
+value_pressure3= tk.Label(lf_pressure, text='NaN mV')
+value_pressure3.grid(column=1, row=2, ipadx=5, ipady=5)
+
+
 
 lf_control = tk.LabelFrame(window, text='Steuerung')
 lf_control.grid(column=0, row=1, padx=20, pady=20)
@@ -255,7 +285,9 @@ MFC_N2 = MFC(ipcon, "ZuC", "23UP",0)
 MFC_Air = MFC(ipcon, "Tj4","23U6",0)
 ##MFC_Ethan = MFC(ipcon, "TiX","23U6",0)
     
-
+pressure1 = pressure(ipcon, "23UE",0)
+#pressure2 = pressure(ipcon, "23UE",1)
+#pressure3 = pressure(ipcon, "23UK",1)
 
 
 
