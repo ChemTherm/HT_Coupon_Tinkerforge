@@ -15,7 +15,8 @@ def tk_loop():
         lable_t_ist_dict[tc_obj_name].config(text = str(tc_list[tc_obj_name].t)+"°C")
     
     value_MFC_N2.config(text = str(MFC_N2.Voltage) + " mV") 
-    value_MFC_Air.config(text = str(MFC_Air.Voltage) + " mV") 
+    #value_MFC_Air.config(text = str(MFC_Air.Voltage) + " mV") 
+    value_MFC_Ethan.config(text = str(MFC_Ethan.Voltage) + " mV") 
     pressure1.get()
     #pressure2.get()
     #pressure3.get()
@@ -24,7 +25,6 @@ def tk_loop():
     #value_pressure3.config(text = str(pressure3.Voltage) + " mV") 
 
 
-    #value_MFC_Ethan.config(text = str(MFC_Ethan.Voltage) + " mV") 
     with open(filename, 'a') as f:
         line = datetime.now().strftime("%H:%M:%S:\t")
         for tc_obj_name in tc_list:
@@ -71,11 +71,14 @@ def getdata():
     MFC_N2_soll = int(set_MFC_N2.get())
     MFC_N2.set(MFC_N2_soll)
 
-    MFC_Air_soll = int(set_MFC_Air.get())
-    MFC_Air.set(MFC_Air_soll)
+   # MFC_Air_soll = int(set_MFC_Air.get())
+    #MFC_Air.set(MFC_Air_soll)
+
+    MFC_Ethan_soll = int(set_MFC_Ethan.get())
+    MFC_Ethan.set(MFC_Ethan_soll)
 
 
-filename = "20230223_NewElectricTest.dat"
+filename = "20230224_Coking_1Zyklus.dat"
 
 with open(filename, 'w') as f:
     headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8 \n"
@@ -282,8 +285,8 @@ t_soll = {}
 
 
 MFC_N2 = MFC(ipcon, "ZuC", "23UP",0)
-MFC_Air = MFC(ipcon, "Tj4","23U6",0)
-##MFC_Ethan = MFC(ipcon, "TiX","23U6",0)
+#MFC_Air = MFC(ipcon, "Tj4","23U6",0)
+MFC_Ethan = MFC(ipcon, "Tj4","23U6",0)
     
 pressure1 = pressure(ipcon, "23UE",0)
 #pressure2 = pressure(ipcon, "23UE",1)
@@ -305,8 +308,8 @@ patrone_6.stop()
 patrone_7.stop()
 patrone_8.stop()
 MFC_N2.stop()
-MFC_Air.stop()
-#MFC_Ethan.stop()
+#MFC_Air.stop()
+MFC_Ethan.stop()
 
 time.sleep(2)
 
