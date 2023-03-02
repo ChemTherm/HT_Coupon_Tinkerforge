@@ -15,13 +15,13 @@ def tk_loop():
         lable_t_ist_dict[tc_obj_name].config(text = str(tc_list[tc_obj_name].t)+"°C")
     
     value_MFC_N2.config(text = str(MFC_N2.Voltage) + " mV") 
-    #value_MFC_Air.config(text = str(MFC_Air.Voltage) + " mV") 
-    value_MFC_Ethan.config(text = str(MFC_Ethan.Voltage) + " mV") 
-    pressure1.get()
-    #pressure2.get()
+    value_MFC_Air.config(text = str(MFC_Air.Voltage) + " mV") 
+    #value_MFC_Ethan.config(text = str(MFC_Ethan.Voltage) + " mV") 
+    #pressure1.get()
+    pressure2.get()
     #pressure3.get()
-    value_pressure1.config(text = str(pressure1.Voltage) + " mV") 
-    #value_pressure2.config(text = str(pressure2.Voltage) + " mV") 
+    #value_pressure1.config(text = str(pressure1.Voltage) + " mV") 
+    value_pressure2.config(text = str(pressure2.Voltage) + " mV") 
     #value_pressure3.config(text = str(pressure3.Voltage) + " mV") 
 
 
@@ -71,16 +71,16 @@ def getdata():
     MFC_N2_soll = int(set_MFC_N2.get())
     MFC_N2.set(MFC_N2_soll)
 
-   # MFC_Air_soll = int(set_MFC_Air.get())
-    #MFC_Air.set(MFC_Air_soll)
+    MFC_Air_soll = int(set_MFC_Air.get())
+    MFC_Air.set(MFC_Air_soll)
 
-    MFC_Ethan_soll = int(set_MFC_Ethan.get())
-    MFC_Ethan.set(MFC_Ethan_soll)
+    #MFC_Ethan_soll = int(set_MFC_Ethan.get())
+    #MFC_Ethan.set(MFC_Ethan_soll)
 
 
-filename = "20230224_Coking_1Zyklus.dat"
+filename = "20230302_2-Zyklus_Coupon28-22_.dat"
 
-with open(filename, 'w') as f:
+with open(filename, 'a') as f:
     headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8 \n"
     f.writelines(headline)
 
@@ -222,8 +222,8 @@ tc_list = {'T1':tc_1,'T2':tc_2,'T3':tc_3,'T4':tc_4,'T5':tc_5,'T6':tc_6,'T7':tc_7
 ido_1 = BrickletIndustrialDigitalOut4V2("TpP", ipcon)
 ido_2 = BrickletIndustrialDigitalOut4V2("Tq2", ipcon)
 ido_3 = BrickletIndustrialDigitalOut4V2("ToX", ipcon)
-p_val = 0.0005
-i_val = 0.00001
+p_val = 0.005
+i_val = 0.000007
 
 patrone_1 = regler(ido_1,0,tc_1)
 patrone_1.config(i_val, p_val)
@@ -285,13 +285,16 @@ t_soll = {}
 
 
 MFC_N2 = MFC(ipcon, "ZuC", "23UP",0)
-#MFC_Air = MFC(ipcon, "Tj4","23U6",0)
-MFC_Ethan = MFC(ipcon, "Tj4","23U6",0)
+MFC_Air = MFC(ipcon, "Tj4","23U6",0)
+#MFC_Ethan = MFC(ipcon, "Tj4","23U6",0)
     
-pressure1 = pressure(ipcon, "23UE",0)
+#pressure1 = pressure(ipcon, "23UE",0)
 #pressure2 = pressure(ipcon, "23UE",1)
 #pressure3 = pressure(ipcon, "23UK",1)
 
+PressureDual = TF_IndustrialDualAnalogIn(ipcon, "23UE")
+pressure2 = pressureNew(PressureDual,0)
+#pressure3 = pressureNew(PressureDual,1)
 
 
 window.after(1000, tk_loop())
@@ -308,8 +311,8 @@ patrone_6.stop()
 patrone_7.stop()
 patrone_8.stop()
 MFC_N2.stop()
-#MFC_Air.stop()
-MFC_Ethan.stop()
+MFC_Air.stop()
+#MFC_Ethan.stop()
 
 time.sleep(2)
 

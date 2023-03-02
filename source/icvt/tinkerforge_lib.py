@@ -103,10 +103,21 @@ class pressure:
     def get(self):
         self.Voltage =self.Ain.get_voltage(self.channel)
 
+class pressureNew:
+    def __init__(self,obj_in,channel) -> None:
+        self.obj = obj_in
+        self.channel = channel
+
+    def get(self):
+        self.Voltage = self.obj.Voltage[self.channel]
+
+
+
 class TF_IndustrialDualAnalogIn:
     Voltage = [0,0]
     def cb_voltage(self,voltages):
-        self.Voltage = voltages/1000.0
+        self.Voltage[0] = voltages[0]/1000.0
+        self.Voltage[1] = voltages[1]/1000.0
 
     def __init__(self,ipcon,ID_in) -> None:
         self.obj = BrickletIndustrialDualAnalogInV2(ID_in, ipcon)
