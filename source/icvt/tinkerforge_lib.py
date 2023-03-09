@@ -94,64 +94,59 @@ class tc:
         ##print(self.UID)
         self.t = temperature/100 
 
-class pressure:
+""" class pressure:
     def __init__(self,ipcon,ID_in,channel) -> None:
         self.UID = ID_in
         self.Ain = BrickletIndustrialDualAnalogInV2(ID_in, ipcon)
         self.channel = channel
 
     def get(self):
-        self.Voltage =self.Ain.get_voltage(self.channel)
+        self.Voltage =self.Ain.get_voltage(self.channel) """
 
-class pressureNew:
+class pressure:
     def __init__(self,obj_in,channel) -> None:
         self.obj = obj_in
         self.channel = channel
 
     def get(self):
+        #self.Voltage = self.obj.Voltage[self.channel]
+        self.obj.get_voltages(self.obj)
         self.Voltage = self.obj.Voltage[self.channel]
 
 
 
 class TF_IndustrialDualAnalogIn:
     Voltage = [0,0]
-    def cb_voltage(self,voltages):
-        self.Voltage[0] = voltages[0]/1000.0
-        self.Voltage[1] = voltages[1]/1000.0
+   # def cb_voltage(self,voltages):
+#        self.Voltage[0] = voltages[0]/1000.0
+  #      self.Voltage[1] = voltages[1]/1000.0
 
     def __init__(self,ipcon,ID_in) -> None:
-        self.obj = BrickletIndustrialDualAnalogInV2(ID_in, ipcon)
-        self.obj.register_callback(self.obj.CALLBACK_ALL_VOLTAGES, self.cb_voltage)
-        self.obj.set_all_voltages_callback_configuration(500, False)
+        self.obj = BrickletIndustrialDualAnalogInV2(ID_in, ipcon)    
+        #self.start()
     
+    #def start(self):
+        #self.obj.register_callback(self.obj.CALLBACK_ALL_VOLTAGES, self.cb_voltage)
+        #self.obj.set_all_voltages_callback_configuration(500, False)
+    
+    def get_voltages(self,TF_obj):
+        self.Voltage = TF_obj.obj.get_all_voltages()
 
 class MFC:
     UID = ''
-    Voltage = 0
-    def cb_voltage(self,voltages):
-        #print(self.AinName )
-        #print("Voltage1: " + str(voltages[0]/1000.0) + " Voltage2: " + str(voltages[1]/1000.0))
-        #if self.channel == channel:
-        self.Voltage = voltages[0]/1000.0
-            #print("Channel: " + str(channel) +" Voltage: " + str(voltage/1.0) + " mV")
+    def get(self):
+        #self.Voltage = self.obj.Voltage[self.channel]
+        self.obj.get_voltages(self.obj)
+        self.Voltage = self.obj.Voltage[self.channel]
 
-    def __init__(self,ipcon,ID_out,ID_in,channel) -> None:
+    def __init__(self,ipcon,ID_out,obj_in,channel) -> None:
         self.UID = ID_out
         self.Aout = BrickletIndustrialAnalogOutV2(ID_out, ipcon)
-        #self.Ain = BrickletAnalogInV3(ID_in, ipcon) old Version, not for Industrial Analog in
-        self.Ain = BrickletIndustrialDualAnalogInV2(ID_in, ipcon)
         self.Aout.set_voltage(0)
         self.Aout.set_enabled(True)
         self.Aout.set_out_led_status_config(0, 5000, 1)
-        self.Ain.register_callback(self.Ain.CALLBACK_ALL_VOLTAGES, self.cb_voltage)
-        self.AinName = ID_in + " " + str(channel )
+        self.obj = obj_in
         self.channel = channel
-        #self.Ain.set_voltage_callback_configuration(1000, False, "x", 0, 0) old Version, not for Industrial Analog in
-        #self.Ain.set_voltage_callback_configuration(channel, 500, False, "x", 0, 0)
-        self.Ain.set_all_voltages_callback_configuration(500, False)
-        #self.Ain.set_voltage_callback_configuration(1, 500, False, "x", 0, 0)
-        #self.obj.set_configuration(0,0)
-
 
     def set(self,value):
         self.Aout.set_voltage(value)
