@@ -29,12 +29,16 @@ def tk_loop():
 
 
     with open(filename, 'a') as f:
-        line = datetime.now().strftime("%H:%M:%S:\t")
+        line = ' ' + datetime.now().strftime("%H:%M:%S:\t")
         for tc_obj_name in tc_list:
             line += str(tc_list[tc_obj_name].t) + '\t'
         for p_obj_name in patronen_list:
             line += str(patronen_list[p_obj_name].pwroutput) + '\t'
-        line += '/n'
+            line += str(set_MFC_N2.get()) + ' \t '+ str(MFC_N2.Voltage) + ' \t '
+            line += str(set_MFC_Air.get()) + ' \t '+ str(MFC_Air.Voltage) + ' \t '
+            line += str(set_MFC_Ethan.get()) + ' \t '+ str(MFC_Ethan.Voltage) + ' \t '
+            line += str(pressure1.Voltage)
+        line += ' /n'
         f.writelines(line)
 
     patrone_1.regeln()
@@ -81,10 +85,10 @@ def getdata():
     MFC_Ethan.set(MFC_Ethan_soll)
 
 
-filename = "20230309_CokingDekoing_21-19.dat"
+filename = "20230311_CokingDekoing_21-06.dat"
 
 with open(filename, 'a') as f:
-    headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8 \n"
+    headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8  \t MFC_N2_soll \t MFC_N2_ist \t MFC_Air_soll \t MFC_Air_ist \t MFC_Ethan_soll \t MFC_Ethan_ist \t Druck1 \n"
     f.writelines(headline)
 
 ''''
@@ -289,7 +293,7 @@ t_soll = {}
 MCFDual1 = TF_IndustrialDualAnalogIn(ipcon, "23UP")
 MFCDual2 = TF_IndustrialDualAnalogIn(ipcon, "23U6")
 MFC_N2 = MFC(ipcon, "ZuC", MCFDual1,0)
-MFC_Air = MFC(ipcon, "Tj4",MCFDual1,1)
+MFC_Air = MFC(ipcon, "ZuD",MCFDual1,1)
 MFC_Ethan = MFC(ipcon, "Tj4",MFCDual2,0)
     
 pressureDual = TF_IndustrialDualAnalogIn(ipcon, "23UE")
