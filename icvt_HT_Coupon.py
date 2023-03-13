@@ -34,10 +34,10 @@ def tk_loop():
             line += str(tc_list[tc_obj_name].t) + '\t'
         for p_obj_name in patronen_list:
             line += str(patronen_list[p_obj_name].pwroutput) + '\t'
-            line += str(set_MFC_N2.get()) + ' \t '+ str(MFC_N2.Voltage) + ' \t '
-            line += str(set_MFC_Air.get()) + ' \t '+ str(MFC_Air.Voltage) + ' \t '
-            line += str(set_MFC_Ethan.get()) + ' \t '+ str(MFC_Ethan.Voltage) + ' \t '
-            line += str(pressure1.Voltage)
+        line += str(set_MFC_N2.get()) + ' \t '+ str(MFC_N2.Voltage) + ' \t '
+        line += str(set_MFC_Air.get()) + ' \t '+ str(MFC_Air.Voltage) + ' \t '
+        line += str(set_MFC_Ethan.get()) + ' \t '+ str(MFC_Ethan.Voltage) + ' \t '
+        line += str(pressure1.Voltage)
         line += ' /n'
         f.writelines(line)
 
