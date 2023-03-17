@@ -85,7 +85,8 @@ def getdata():
     MFC_Ethan.set(MFC_Ethan_soll)
 
 
-filename = "Test.dat"
+filename = "20230316_2CokingDecoking_28_18.dat"
+#filename = "Test.dat"
 
 with open(filename, 'a') as f:
     headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8  \t MFC_N2_soll \t MFC_N2_ist \t MFC_Air_soll \t MFC_Air_ist \t MFC_Ethan_soll \t MFC_Ethan_ist \t Druck1 \n"
