@@ -5,7 +5,8 @@ import json
 import customtkinter
 from PIL import Image,ImageTk
 from datetime import datetime
-from source.icvt.tinkerforge_lib import *
+#from ..TinkerForge_Lib.tinkerforge_lib import *
+from ChemTherm_library.tinkerforge_lib import *
 
 ''''
 ====================================
