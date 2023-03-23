@@ -1,0 +1,24 @@
+{
+    "Background":{
+        "name": "./img/Background1Reactor.png",
+        "width": 624,
+        "height": 862,
+        "factor": 1,
+        "x": 600,
+        "y": 100
+        
+    },
+    
+    "T-Set":{
+        "x":[250 , 250, 250, 250],
+        "y":[230, 350, 470, 590],
+        "Kommentar": "Position der T-Set für jede Zone pro Reaktor"
+    },
+    "T-Reaktor":{
+        "x": [ 50 , 50 ,50 , 50 , 455, 455, 455, 455],
+        "y": [ 190, 320, 450, 580, 233, 363, 493, 623]
+    }
+
+
+
+}

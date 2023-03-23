@@ -1,0 +1,23 @@
+{
+    "Background":{
+        "name": "Background2Reactors",
+        "width": 3041,
+        "height": 2188,
+        "x": 400,
+        "y": 150
+        
+    },
+    
+    "T-Set":{
+        "x":[650 , 650, 650, 650],
+        "y":[380, 500, 620, 740],
+        "Kommentar": "Position der T-Set für jede Zone pro Reaktor"
+    },
+    "T-Reaktor":{
+        "x": [ 450 , 450 ,450 , 450 , 850, 850, 850, 850],
+        "y": [ 340, 475, 600, 730, 400, 535, 660, 790]
+    }
+
+
+
+}

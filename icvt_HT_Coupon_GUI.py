@@ -5,7 +5,7 @@ import json
 import customtkinter as ctk
 from PIL import Image,ImageTk
 from datetime import datetime
-from source.icvt.tinkerforge_lib import *
+from ChemTherm_library.tinkerforge_lib import *
 
 ''''
 ====================================
@@ -30,6 +30,8 @@ LOAD JSON FILE
 '''
 with open(json_name +'.json', 'r') as config_file:
     config = json.load(config_file)
+
+
 
 app = ctk.CTk()
 scrW=app.winfo_screenheight()
