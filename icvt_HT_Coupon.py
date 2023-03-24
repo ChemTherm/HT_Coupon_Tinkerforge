@@ -37,7 +37,7 @@ def tk_loop():
         line += str(set_MFC_N2.get()) + ' \t '+ str(MFC_N2.Voltage) + ' \t '
         line += str(set_MFC_Air.get()) + ' \t '+ str(MFC_Air.Voltage) + ' \t '
         line += str(set_MFC_Ethan.get()) + ' \t '+ str(MFC_Ethan.Voltage) + ' \t '
-        line += str(pressure1.Voltage)
+        line += str(pressure1.Voltage) + ' \t '
         #line += ' /n'
         f.writelines(line)
 
@@ -85,8 +85,8 @@ def getdata():
     MFC_Ethan.set(MFC_Ethan_soll)
 
 
-#filename = "20230320_CokingDecoking_lowResidence_28_21.dat"
-filename = "Test.dat"
+filename = "20230324_Coking_lowResidence_28_23.dat"
+#filename = "Test.dat"
 
 with open(filename, 'a') as f:
     headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8  \t MFC_N2_soll \t MFC_N2_ist \t MFC_Air_soll \t MFC_Air_ist \t MFC_Ethan_soll \t MFC_Ethan_ist \t Druck1 \n"
