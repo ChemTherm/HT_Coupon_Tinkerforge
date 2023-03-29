@@ -13,10 +13,15 @@ def tk_loop():
 
 
     if running == 1:
-        T_set = json_timing(config,section,t0)
-        for i in lable_T_soll:
-            lable_T_soll[i].delete(0, tk.END)
-            lable_T_soll[i].insert(0,str(T_set[i]))
+        T_set, MFC_set = json_timing(config,section,t0)
+        for i in set_T:
+            #set_T[i].delete(0, tk.END)
+            #set_T[i].insert(0,str(T_set[i]))
+            set_T[i].set(str(T_set[i]))
+        for i in set_MFC:
+            set_MFC[i].set(str(MFC_set[i]))
+                                
+
             
     for i in lable_T_ist:
         progressbar[i].set(patronen_list[p_obj_name].pwroutput/100)
@@ -62,22 +67,22 @@ def tk_loop():
 
 def getdata():    
 
-    if lable_T_soll[0].get() != '':
-        patrone_1.set_t_soll(float(lable_T_soll[0].get()))
-    if lable_T_soll[1].get() != '':
-        patrone_2.set_t_soll(float(lable_T_soll[1].get()))
-    if lable_T_soll[2].get() != '':
-        patrone_3.set_t_soll(float(lable_T_soll[2].get()))
-    if lable_T_soll[3].get() != '':
-        patrone_4.set_t_soll(float(lable_T_soll[3].get()))
-    if lable_T_soll[4].get() != '':
-        patrone_5.set_t_soll(float(lable_T_soll[4].get()))
-    if lable_T_soll[5].get() != '':
-        patrone_6.set_t_soll(float(lable_T_soll[5].get()))
-    if lable_T_soll[6].get() != '':
-        patrone_7.set_t_soll(float(lable_T_soll[6].get()))
-    if lable_T_soll[7].get() != '':
-        patrone_8.set_t_soll(float(lable_T_soll[7].get()))
+    if set_T[0].get() != '':
+        patrone_1.set_t_soll(float(set_T[0].get()))
+    if set_T[1].get() != '':
+        patrone_2.set_t_soll(float(set_T[1].get()))
+    if set_T[2].get() != '':
+        patrone_3.set_t_soll(float(set_T[2].get()))
+    if set_T[3].get() != '':
+        patrone_4.set_t_soll(float(set_T[3].get()))
+    if set_T[4].get() != '':
+        patrone_5.set_t_soll(float(set_T[4].get()))
+    if set_T[5].get() != '':
+        patrone_6.set_t_soll(float(set_T[5].get()))
+    if set_T[6].get() != '':
+        patrone_7.set_t_soll(float(set_T[6].get()))
+    if set_T[7].get() != '':
+        patrone_8.set_t_soll(float(set_T[7].get()))
 
 
     MFC_N2.set(int(set_MFC[0].get()))
@@ -202,10 +207,10 @@ for i in range(0,8):
     progressbar[i] = ctk.CTkProgressBar(master=window, width = 80, progress_color = 'red')
     progressbar[i] .place(x = x_offset + img['T-Reaktor']['x'][i]-8,y = y_offset + img['T-Reaktor']['y'][i]+30)
 
-lable_T_soll ={}
+set_T ={}
 for i in range(0,4):
-    lable_T_soll[i] = tk.Entry(window, font = ('Arial',16), width = 6,bg='light blue' )
-    lable_T_soll[i].place(x = x_offset + img['T-Set']['x'][i],y = y_offset + img['T-Set']['y'][i])
+    set_T[i] = tk.Entry(window, font = ('Arial',16), width = 6,bg='light blue' )
+    set_T[i].place(x = x_offset + img['T-Set']['x'][i],y = y_offset + img['T-Set']['y'][i])
 
 name_MFC={}; set_MFC={}; unit_MFC={}; value_MFC={}
 for i in range(0,3):
