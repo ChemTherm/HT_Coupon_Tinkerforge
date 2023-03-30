@@ -17,7 +17,7 @@ def tk_loop():
         T_set, MFC_set = json_timing(config,section,t0)
         for i in set_T:
             set_T[i].delete(0, tk.END)
-            set_T[i].insert(0,str(T_set[i]))
+            set_T[i].insert(0,str("{0:.2f}").format(T_set[i]))
             #set_T[i].set(str(T_set[i]))
         for i in set_MFC:
             set_MFC[i].delete(0, tk.END)
@@ -27,7 +27,9 @@ def tk_loop():
         T_set, MFC_set,t_end = set_function(t0)    
         for i in set_T:
             set_T[i].delete(0, tk.END)
-            set_T[i].insert(0,str(T_set[i]))
+            set_T[i].insert(0,str("{0:.2f}").format(T_set[i]))
+            print(time.time()-t0)
+            
             #set_T[i].set(str(T_set[i]))
         for i in set_MFC:
             set_MFC[i].delete(0, tk.END)
@@ -113,6 +115,7 @@ def Start_Button_callback():
 def Stop_Button_callback():
     global section, running_json, t0
     running_json = 0
+    running_setFunction = 0
     Start_Button.configure(state = "enabled")
 
 def Heating_Button_callback():
@@ -326,9 +329,9 @@ Exit_Button.place(x=1700, y=50)
 #fileName_Entry = ctk.CTkEntry(master=frame_1, placeholder_text="CTkEntry")
 #-----------Check Boxes------
 check_Verdampfer = ctk.CTkCheckBox(master=window,text = "Verdampfer an")
-check_Verdampfer.place(x=100, y=50)
+check_Verdampfer.place(x=100, y=200)
 check_Ventile = ctk.CTkCheckBox(master=window,text = "Ventile offen")
-check_Ventile.place(x=100, y=100)
+check_Ventile.place(x=100, y=250)
 
 
 
