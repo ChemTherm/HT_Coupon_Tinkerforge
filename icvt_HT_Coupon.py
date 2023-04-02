@@ -22,18 +22,20 @@ def tk_loop():
         for i in set_MFC:
             set_MFC[i].delete(0, tk.END)
             set_MFC[i].insert(0,str(MFC_set[i]))
+        getdata()           
     
     if running_setFunction == 1:     
         T_set, MFC_set,t_end = set_function(t0)    
+        lable_timer.configure(text = str("{0:.2f}").format(t_end/60)+" min")
         for i in set_T:
             set_T[i].delete(0, tk.END)
             set_T[i].insert(0,str("{0:.2f}").format(T_set[i]))
-            print(time.time()-t0)
             
             #set_T[i].set(str(T_set[i]))
         for i in set_MFC:
             set_MFC[i].delete(0, tk.END)
-            set_MFC[i].insert(0,str(MFC_set[i]))                
+            set_MFC[i].insert(0,str(MFC_set[i]))     
+        getdata()           
 
 
             
@@ -91,14 +93,14 @@ def getdata():
         patrone_3.set_t_soll(float(set_T[2].get()))
     if set_T[3].get() != '':
         patrone_4.set_t_soll(float(set_T[3].get()))
-    if set_T[4].get() != '':
-        patrone_5.set_t_soll(float(set_T[4].get()))
-    if set_T[5].get() != '':
-        patrone_6.set_t_soll(float(set_T[5].get()))
-    if set_T[6].get() != '':
-        patrone_7.set_t_soll(float(set_T[6].get()))
-    if set_T[7].get() != '':
-        patrone_8.set_t_soll(float(set_T[7].get()))
+    if set_T[0].get() != '':
+        patrone_5.set_t_soll(float(set_T[0].get()))
+    if set_T[1].get() != '':
+        patrone_6.set_t_soll(float(set_T[1].get()))
+    if set_T[2].get() != '':
+        patrone_7.set_t_soll(float(set_T[2].get()))
+    if set_T[3].get() != '':
+        patrone_8.set_t_soll(float(set_T[3].get()))
 
 
     MFC_N2.set(int(set_MFC[0].get()))
@@ -113,10 +115,16 @@ def Start_Button_callback():
     Start_Button.configure(state = "disabled")
 
 def Stop_Button_callback():
-    global section, running_json, t0
+    global section, running_json,running_setFunction, t0
     running_json = 0
     running_setFunction = 0
     Start_Button.configure(state = "enabled")
+    lable_timer.configure(text = str("{0:.2f}").format(0)+" min")
+    Heating_Button.configure(state = "enabled", fg_color = 'blue')
+    Coking_Button.configure(state = "enabled", fg_color = 'blue')
+    Cooling_Button.configure(state = "enabled", fg_color = 'blue')
+    Decoking_Button.configure(state = "enabled", fg_color = 'blue')
+    SteamTreatment_Button.configure(state = "enabled", fg_color = 'blue')
 
 def Heating_Button_callback():
     global t0, set_function, running_setFunction
@@ -124,7 +132,60 @@ def Heating_Button_callback():
     running_setFunction = 1
     set_function = heating
     Start_Button.configure(state = "disabled")
+    Heating_Button.configure(state = "disabled", fg_color = 'red')
+    Coking_Button.configure(state = "disabled")
+    Cooling_Button.configure(state = "disabled")
+    Decoking_Button.configure(state = "disabled")
+    SteamTreatment_Button.configure(state = "disabled")
+
+def Coking_Button_callback():
+    global t0, set_function, running_setFunction
+    t0 = time.time()
+    running_setFunction = 1
+    set_function = Coking
+    Start_Button.configure(state = "disabled")
     Heating_Button.configure(state = "disabled")
+    Coking_Button.configure(state = "disabled", fg_color = 'red')
+    Cooling_Button.configure(state = "disabled")
+    Decoking_Button.configure(state = "disabled")
+    SteamTreatment_Button.configure(state = "disabled")
+
+def Cooling_Button_callback():
+    global t0, set_function, running_setFunction
+    t0 = time.time()
+    running_setFunction = 1
+    set_function = Cooling
+    Start_Button.configure(state = "disabled")
+    Heating_Button.configure(state = "disabled")
+    Coking_Button.configure(state = "disabled")
+    Cooling_Button.configure(state = "disabled", fg_color = 'red')
+    Decoking_Button.configure(state = "disabled")
+    SteamTreatment_Button.configure(state = "disabled")
+
+def Decoking_Button_callback():
+    global t0, set_function, running_setFunction
+    t0 = time.time()
+    running_setFunction = 1
+    set_function = Decoking
+    Start_Button.configure(state = "disabled")
+    Heating_Button.configure(state = "disabled")
+    Coking_Button.configure(state = "disabled")
+    Cooling_Button.configure(state = "disabled")
+    Decoking_Button.configure(state = "disabled", fg_color = 'red')
+    SteamTreatment_Button.configure(state = "disabled")
+
+def SteamTreatment_Button_callback():
+    global t0, set_function, running_setFunction
+    t0 = time.time()
+    running_setFunction = 1
+    set_function = SteamTreatment
+    Start_Button.configure(state = "disabled")
+    Heating_Button.configure(state = "disabled")
+    Coking_Button.configure(state = "disabled")
+    Cooling_Button.configure(state = "disabled")
+    Decoking_Button.configure(state = "disabled")
+    SteamTreatment_Button.configure(state = "disabled", fg_color = 'red')
+
 
 '''' 
 ====================================
@@ -136,7 +197,7 @@ section = 0
 running_Json = 0
 running_setFunction = 0
 
-#filename = "20230324_Coking_lowResidence_28_23.dat"
+#filename = "20230330_Decoking_lowResidence_EmptyReactor.dat"
 filename = "Test.dat"
 
 with open(filename, 'a') as f:
@@ -263,9 +324,10 @@ label_background.place(x = x_offset,y = y_offset)
 label_background.lower()
 
 
+
 lf_pressure = tk.LabelFrame(window, text='Druck')
 lf_pressure.grid(column=3, row=2, padx=20, pady=20)
-lf_pressure.place(x= 1050,y= 400)
+lf_pressure.place(x= 1050,y= 840)
 
 Lable_pressure1= tk.Label(lf_pressure, text='Druck_1 ')
 Lable_pressure1.grid(column=0, row=0, ipadx=5, ipady=5)
@@ -314,24 +376,36 @@ for i in range(0,3):
     value_MFC[i].grid(column=3, row=i+1, ipadx=5, ipady=5)
 
 #----------- Buttons -----------
-button1 = tk.Button(lf_control,text='set values', command=getdata, bg='brown', fg='white')
-button1.grid(column=3, row=9, ipadx=10, ipady=10)
-Start_Button = ctk.CTkButton(master=window, command=Start_Button_callback,text="Messung starten", font = ('Arial',16))
-Start_Button.place(x=300, y=50)
-Stop_Button = ctk.CTkButton(master=window, command=Stop_Button_callback,text="Messung stoppen", font = ('Arial',16))
-Stop_Button.place(x=300, y=100)
-Heating_Button = ctk.CTkButton(master=window, command=Heating_Button_callback,text="Heating", font = ('Arial',16))
-Heating_Button.place(x=300, y=150)
+button1 = tk.Button(lf_control,text='Set Values', command=getdata, bg='brown', fg='white')
+button1.grid(column=1, row=0, ipadx=8, ipady=8)
+Stop_Button = ctk.CTkButton(master=lf_control, command=Stop_Button_callback,text="Messung stoppen", font = ('Arial',16),fg_color = 'blue')
+Stop_Button.grid(column=2, row=0, padx=10, pady = 8)
+Start_Button = ctk.CTkButton(master=lf_control, command=Start_Button_callback,text="Messung starten", font = ('Arial',16),fg_color = 'blue')
+Start_Button.grid(column=2, row=1, padx=10, pady = 8)
+Heating_Button = ctk.CTkButton(master=lf_control, command=Heating_Button_callback,text="Heating", font = ('Arial',16),fg_color = 'blue')
+Heating_Button.grid(column=2, row=2, pady = 8)
+Coking_Button = ctk.CTkButton(master=lf_control, command=Coking_Button_callback,text="Coking", font = ('Arial',16),fg_color = 'blue')
+Coking_Button.grid(column=2, row=3, pady = 8)
+Cooling_Button = ctk.CTkButton(master=lf_control, command=Cooling_Button_callback,text="Cooling", font = ('Arial',16),fg_color = 'blue')
+Cooling_Button.grid(column=2, row=4, pady = 8)
+Decoking_Button = ctk.CTkButton(master=lf_control, command=Decoking_Button_callback,text="Decoking", font = ('Arial',16),fg_color = 'blue')
+Decoking_Button.grid(column=2, row=5, pady = 8)
+SteamTreatment_Button = ctk.CTkButton(master=lf_control, command=SteamTreatment_Button_callback,text="SteamTreatment", font = ('Arial',16),fg_color = 'blue')
+SteamTreatment_Button.grid(column=2, row=6, pady = 8)
+
+
 Exit_Button = ctk.CTkButton(master=window,text="", command=window.destroy, fg_color= 'transparent',  hover_color='#F2F2F2', image= close_img)
 Exit_Button.place(x=1700, y=50)
 
+lable_timer = ctk.CTkLabel(master = lf_control , font = ('Arial',16), text='0 min')
+lable_timer.grid(column=1, row=2)
 #----------- Entry Fields------
 #fileName_Entry = ctk.CTkEntry(master=frame_1, placeholder_text="CTkEntry")
 #-----------Check Boxes------
-check_Verdampfer = ctk.CTkCheckBox(master=window,text = "Verdampfer an")
-check_Verdampfer.place(x=100, y=200)
-check_Ventile = ctk.CTkCheckBox(master=window,text = "Ventile offen")
-check_Ventile.place(x=100, y=250)
+check_Verdampfer = ctk.CTkCheckBox(master=lf_control,text = "Verdampfer an")
+check_Verdampfer.grid(column=1, row=3)
+check_Ventile = ctk.CTkCheckBox(master=lf_control,text = "Ventile offen")
+check_Ventile.grid(column=1, row=4)
 
 
 
