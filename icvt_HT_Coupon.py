@@ -22,7 +22,9 @@ def tk_loop():
         for i in set_MFC:
             set_MFC[i].delete(0, tk.END)
             set_MFC[i].insert(0,str(MFC_set[i]))
-        getdata()           
+        getdata()         
+        if (t_end < 0):
+            Stop_Button_callback()  
     
     if running_setFunction == 1:     
         T_set, MFC_set,t_end = set_function(t0)    
@@ -36,7 +38,8 @@ def tk_loop():
             set_MFC[i].delete(0, tk.END)
             set_MFC[i].insert(0,str(MFC_set[i]))     
         getdata()           
-
+        if (t_end < 0):
+            Stop_Button_callback()
 
             
     #for i in lable_T_ist:
@@ -138,6 +141,18 @@ def Heating_Button_callback():
     Decoking_Button.configure(state = "disabled")
     SteamTreatment_Button.configure(state = "disabled")
 
+def Heating450_Button_callback():
+    global t0, set_function, running_setFunction
+    t0 = time.time()
+    running_setFunction = 1
+    set_function = heating_450
+    Start_Button.configure(state = "disabled")
+    Heating_Button.configure(state = "disabled", fg_color = 'red')
+    Coking_Button.configure(state = "disabled")
+    Cooling_Button.configure(state = "disabled")
+    Decoking_Button.configure(state = "disabled")
+    SteamTreatment_Button.configure(state = "disabled")
+
 def Coking_Button_callback():
     global t0, set_function, running_setFunction
     t0 = time.time()
@@ -155,6 +170,19 @@ def Cooling_Button_callback():
     t0 = time.time()
     running_setFunction = 1
     set_function = Cooling
+    Start_Button.configure(state = "disabled")
+    Heating_Button.configure(state = "disabled")
+    Coking_Button.configure(state = "disabled")
+    Cooling_Button.configure(state = "disabled", fg_color = 'red')
+    Decoking_Button.configure(state = "disabled")
+    SteamTreatment_Button.configure(state = "disabled")
+
+
+def Cooling450_Button_callback():
+    global t0, set_function, running_setFunction
+    t0 = time.time()
+    running_setFunction = 1
+    set_function = Cooling_450
     Start_Button.configure(state = "disabled")
     Heating_Button.configure(state = "disabled")
     Coking_Button.configure(state = "disabled")
@@ -197,8 +225,8 @@ section = 0
 running_Json = 0
 running_setFunction = 0
 
-#filename = "20230330_Decoking_lowResidence_EmptyReactor.dat"
-filename = "Test.dat"
+filename = "20230403_longTime_28_16.dat"
+#filename = "Test.dat"
 
 with open(filename, 'a') as f:
     headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8  \t MFC_N2_soll \t MFC_N2_ist \t MFC_Air_soll \t MFC_Air_ist \t MFC_Ethan_soll \t MFC_Ethan_ist \t Druck1 \n"
@@ -252,7 +280,7 @@ tc_list = {'T1':tc_1,'T2':tc_2,'T3':tc_3,'T4':tc_4,'T5':tc_5,'T6':tc_6,'T7':tc_7
 ido_1 = BrickletIndustrialDigitalOut4V2("TpP", ipcon)
 ido_2 = BrickletIndustrialDigitalOut4V2("Tq2", ipcon)
 ido_3 = BrickletIndustrialDigitalOut4V2("ToX", ipcon)
-p_val = 0.005
+p_val = 0.015
 i_val = 0.000007
 
 patrone_1 = regler(ido_1,0,tc_1)
@@ -380,14 +408,18 @@ button1 = tk.Button(lf_control,text='Set Values', command=getdata, bg='brown', f
 button1.grid(column=1, row=0, ipadx=8, ipady=8)
 Stop_Button = ctk.CTkButton(master=lf_control, command=Stop_Button_callback,text="Messung stoppen", font = ('Arial',16),fg_color = 'blue')
 Stop_Button.grid(column=2, row=0, padx=10, pady = 8)
-Start_Button = ctk.CTkButton(master=lf_control, command=Start_Button_callback,text="Messung starten", font = ('Arial',16),fg_color = 'blue')
+Start_Button = ctk.CTkButton(master=lf_control, command=Start_Button_callback,text="JSON starten", font = ('Arial',16),fg_color = 'blue')
 Start_Button.grid(column=2, row=1, padx=10, pady = 8)
 Heating_Button = ctk.CTkButton(master=lf_control, command=Heating_Button_callback,text="Heating", font = ('Arial',16),fg_color = 'blue')
 Heating_Button.grid(column=2, row=2, pady = 8)
+Heating_Button = ctk.CTkButton(master=lf_control, command=Heating450_Button_callback,text="Heating 450 °C", font = ('Arial',16),fg_color = 'blue')
+Heating_Button.grid(column=3, row=2, pady = 8)
 Coking_Button = ctk.CTkButton(master=lf_control, command=Coking_Button_callback,text="Coking", font = ('Arial',16),fg_color = 'blue')
 Coking_Button.grid(column=2, row=3, pady = 8)
 Cooling_Button = ctk.CTkButton(master=lf_control, command=Cooling_Button_callback,text="Cooling", font = ('Arial',16),fg_color = 'blue')
 Cooling_Button.grid(column=2, row=4, pady = 8)
+Cooling_Button = ctk.CTkButton(master=lf_control, command=Cooling450_Button_callback,text="Cooling 450°C", font = ('Arial',16),fg_color = 'blue')
+Cooling_Button.grid(column=3, row=4, pady = 8)
 Decoking_Button = ctk.CTkButton(master=lf_control, command=Decoking_Button_callback,text="Decoking", font = ('Arial',16),fg_color = 'blue')
 Decoking_Button.grid(column=2, row=5, pady = 8)
 SteamTreatment_Button = ctk.CTkButton(master=lf_control, command=SteamTreatment_Button_callback,text="SteamTreatment", font = ('Arial',16),fg_color = 'blue')
