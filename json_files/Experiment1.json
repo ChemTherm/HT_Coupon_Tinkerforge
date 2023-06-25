@@ -1,0 +1,41 @@
+{
+    "PATH":{
+        "SaveFile": "./Data",
+        "images": "./img/"
+    },
+    
+    "TKINTER":{
+        "background-color": "#F2F2F2",
+        "tabpadx": 50,
+        "font-size": 22        
+    },
+
+    "REACTOR":{
+        "Name": "High Temperature Coupon Reactor",
+        "amount": 1
+    },
+    "TIMING":{
+        "NoSections": 9,
+        "t":         [0,    5400,   1800,   3600,   18000,  1800,   1800,   900,    14400],  
+        "R1-Z1":     [20,   850,    850,    986,    986,    850,    1000,   1000,   20],
+        "R1-Z2":     [20,   850,    850,    986,    986,    850,    1000,   1000,   20],
+        "R1-Z3":     [20,   850,    850,    986,    986,    850,    1000,   1000,   20],
+        "R1-Z4":     [20,   850,    850,    986,    986,    850,    1000,   1000,   20],
+        "MFC-N2":    [0,    3750,   3750,   0,      0,      3750,   1250,   0,      3750],
+        "MFC-Air":   [0,    0,      0,      0,      0,      0,      1250,   1250,   0],
+        "MFC-Ethan": [0,    0,      0,      833,    833,    0,      0,      0,      0],
+
+
+        "Comment":"Jede Spalte steht für eine Zeitphase t in Sekunden, die Temperatur wird in 4 Zonen (Z 1-4) pro Reaktor eingestellt, MFC Einstellungen in mV",
+        "Section": ["Setup", "Pre Heating", "Water On", "Coking Heat","Coking", "Cooling", "Decoking", "SteamTreatment", "End" ]
+    },
+
+    "MFC":{
+        "amount":3,
+        "name": ["N2",  "Air",  "Ethan"]
+
+    }
+
+
+
+}

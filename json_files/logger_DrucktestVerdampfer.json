@@ -1,0 +1,52 @@
+{
+  "data": {
+    "csv": {
+      "enabled": true,
+      "file_name": "/home/matthies/Gitkraken/new/HT_Coupon_Tinkerforge/Drucktest.csv"
+    },
+    "time_format": "de-msec",
+    "time_format_strftime": "%Y%m%d_%H%M%S"
+  },
+  "debug": {
+    "log": {
+      "enabled": false,
+      "file_name": "/home/matthies/logger_debug_1681416342.log",
+      "level": "debug"
+    },
+    "time_format": "de"
+  },
+  "devices": [
+    {
+      "host": "default",
+      "name": "Industrial Dual Analog In Bricklet 2.0",
+      "options": {
+        "Sample Rate": {
+          "value": "488 SPS"
+        }
+      },
+      "uid": "23UE",
+      "values": {
+        "ADC Values": {
+          "interval": 0,
+          "subvalues": {
+            "Channel0": true,
+            "Channel1": true
+          }
+        },
+        "Voltage (Channel0)": {
+          "interval": 0.0
+        },
+        "Voltage (Channel1)": {
+          "interval": 0.0
+        }
+      }
+    }
+  ],
+  "hosts": {
+    "default": {
+      "name": "localhost",
+      "port": 4223,
+      "secret": null
+    }
+  }
+}
