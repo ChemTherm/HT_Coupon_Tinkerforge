@@ -1,0 +1,43 @@
+{
+    "PATH":{
+        "SaveFile": "./Data",
+        "images": "./img/"
+    },
+    
+    "TKINTER":{
+        "background-color": "#F2F2F2",
+        "tabpadx": 50,
+        "font-size": 22        
+    },
+
+    "REACTOR":{
+        "Name": "High Temperature Coupon Reactor",
+        "amount": 1
+    },
+    "TIMING":{
+        "NoSections": 15,
+        "t":         [0,    3600,   3600,   1800,   3600,   1800,   3600,   1800,   3600,   1800,   3600,   1800,   3600,   3600,   3600],  
+        "R1-Z1":     [550,   550,    550,    650,    650,    750,    750,    850,    850,    950,    950,    1050,   1050,   20,   20],
+        "R1-Z2":     [550,   550,    550,    650,    650,    750,    750,    850,    850,    950,    950,    1050,   1050,   20,   20],
+        "R1-Z3":     [550,   550,    550,    650,    650,    750,    750,    850,    850,    950,    950,    1050,   1050,   20,  20],
+        "R1-Z4":     [550,   550,    550,    650,    650,    750,    750,    850,    850,    950,    950,    1050,   1050,   20,   20],
+        "MFC-N2":    [3750,    3750,   3750,   3750,   3750,   3750,   3750,   3750,   3750,   3750,   3750,   3750,   3750,   3750,   3750],
+        "MFC-Air":   [0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0],
+        "MFC-Ethan": [0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0],
+
+
+        "Comment":"Jede Spalte steht für eine Zeitphase t in Sekunden, die Temperatur wird in 4 Zonen (Z 1-4) pro Reaktor eingestellt, MFC Einstellungen in mV",
+        "Section": ["Setup", "T1 Heating", "Water On", "Coking Heat","Coking", "Cooling", "Decoking", "SteamTreatment", "End" ]
+    },
+
+    "MFC":{
+        "amount":3,
+        "name": ["N2",  "Air",  "Ethan"]
+
+    }
+
+
+
+
+
+}

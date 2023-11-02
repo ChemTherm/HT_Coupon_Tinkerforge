@@ -1,0 +1,42 @@
+{
+    "PATH":{
+        "SaveFile": "./Data",
+        "images": "./img/"
+    },
+    
+    "TKINTER":{
+        "background-color": "#F2F2F2",
+        "tabpadx": 50,
+        "font-size": 22        
+    },
+
+    "REACTOR":{
+        "Name": "High Temperature Coupon Reactor",
+        "amount": 1
+    },
+    "TIMING":{
+        "NoSections": 11,
+        "t":         [120,   9000,     9000,     9000,     9000,	9000,   9000,   1800,	900,    3600,	3600],  
+        "R1-Z1":     [1036,   1036,    1036,     1036,     1036,    1036,   1036,   1000,   1000,   200, 	0],
+        "R1-Z2":     [1036,   1036,    1036,     1036,     1036,    1036, 	1036,   1000,   1000,   200, 	0],
+        "R1-Z3":     [1036,   1036,    1036,     1036,     1036,    1036, 	1036,   1000,   1000,   200, 	0],
+        "R1-Z4":     [1036,   1036,    1036,     1036,     1036,    1036, 	1036,   1000,   1000,   200, 	0],
+        "MFC-N2":    [0,        0,      0,        0,      0,        0, 	    0,      1250, 	0,      3750,   3750],
+        "MFC-Air":   [0,        0,      0,        0,	  0,        0, 	    0,      1250, 	1250,   0,	    0],
+        "MFC-Ethan": [666,    666,      583,      916,    999,      1082,   833,    0,      0,      0,      0],
+        "Verdampfer": [160,    160,      140,      220,    240,     260,    200,    0,      200,    50,     0],
+
+
+        "Comment":"Jede Spalte steht für eine Zeitphase t in Sekunden, die Temperatur wird in 4 Zonen (Z 1-4) pro Reaktor eingestellt, MFC Einstellungen in mV",
+        "Section": ["Setup", "Pre Heating", "CokingHeat", "Coking","Cooling", "Decoking", "SteamTreatment", "Cooling", "CokingHeat", "Coking","Cooling", "Decoking", "SteamTreatment", "Cooling",  "CokingHeat", "Coking","Cooling", "Decoking", "SteamTreatment", "Cooling","Cooldown", "End",  "End",  "End" ]
+    },
+
+    "MFC":{
+        "amount":3,
+        "name": ["N2",  "Air",  "Ethan"]
+
+    }
+
+
+
+}

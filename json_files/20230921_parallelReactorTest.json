@@ -1,0 +1,40 @@
+{
+    "PATH":{
+        "SaveFile": "./Data",
+        "images": "./img/"
+    },
+
+    "REACTOR":{
+        "Name": "High Temperature Coupon Reactor",
+        "amount": 2
+    },
+    "TIMING":{
+        "NoSections": 10,
+        "t":         [10,   7200,   3600,    18000,   1800,	    1800,	900,    1800,  3600,    3600],  
+        "R1-Z1":     [20,   850,    986,     986,     850,  	1000,   1000,   850,   20,     20],
+        "R1-Z2":     [20,   850,    986,     986,     850,      1000, 	1000,   850,   20,     20 	],
+        "R1-Z3":     [20,   850,    986,     986,     850,      1000, 	1000,   850,   20,     20 	],
+        "R1-Z4":     [20,   850,    986,     986,     850,      1000, 	1000,   850,   20,     20	],
+        "R2-Z1":     [20,   850,    986,     986,     850,  	1000,   1000,   850,   20,     20	],
+        "R2-Z2":     [20,   850,    986,     986,     850,      1000, 	1000,   850,   20,     20 	],
+        "R2-Z3":     [20,   850,    986,     986,     850,      1000, 	1000,   850,   20,     20],
+        "R2-Z4":     [20,   850,    986,     986,     850,      1000, 	1000,   850,   20,     20],
+        "MFC-N2":    [5000, 5000,   0,        0,      5000,     2500, 	0,      5000,  5000,    5000],
+        "MFC-Air":   [0,    0,      0,        0,	  0,        2500, 	2500,   0, 	   0,        0	  ],
+        "MFC-Ethan": [0,    0,      1666,      1666,    0,      0,    	0,      0,    0,      0],
+        "Verdampfer": [0,    0,      400,      400,    0,       0,    	400,    0,    0,      0],
+
+
+        "Comment":"Jede Spalte steht für eine Zeitphase t in Sekunden, die Temperatur wird in 4 Zonen (Z 1-4) pro Reaktor eingestellt, MFC Einstellungen in mV",
+        "Section": ["Setup", "Pre Heating", "CokingHeat", "Coking","Cooling", "Decoking", "SteamTreatment", "Cooling", "CokingHeat", "Coking","Cooling", "Decoking", "SteamTreatment", "Cooling",  "CokingHeat", "Coking","Cooling", "Decoking", "SteamTreatment", "Cooling","Cooldown", "End" ]
+    },
+
+    "MFC":{
+        "amount":3,
+        "name": ["N2",  "Air",  "Ethan"]
+
+    }
+
+
+
+}

@@ -288,12 +288,12 @@ argparser.add_argument(
 
 json_name = str(argparser.parse_args().experiment)
 if json_name == "None":
-    json_name="20231021_3Cycling_28.20"
+    json_name="20231022_CokingFTIRtest_28.11"
 
 filename = json_name + ".dat"
-#filename = "Test.dat"
+filename = "Freibrand_Test.dat"
 with open(filename, 'a') as f:
-    headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8 \t M1 \t M2 \t M3 \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8  \t MFC_N2_soll \t MFC_N2_ist \t MFC_Air_soll \t MFC_Air_ist \t MFC_Ethan_soll \t MFC_Ethan_ist \t Druck1  \t Druck2 \n"
+    headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8 \t M1 \t M2 \t M3  \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8  \t MFC_N2_soll \t MFC_N2_ist \t MFC_Air_soll \t MFC_Air_ist \t MFC_Ethan_soll \t MFC_Ethan_ist \t Druck1  \t Druck2 \n"
     f.writelines(headline)
 '''
 ====================================
@@ -316,24 +316,23 @@ ipcon.connect(HOST, PORT) # Connect to brickd
 Relay1 = BrickletIndustrialDualRelay("Zt2", ipcon)
 
 
-tc_1 = tc(ipcon, "WR8", typ='N') #A 
-tc_2 = tc(ipcon, "WQp", typ='N') #B 
-tc_3 = tc(ipcon, "WPM", typ='N') #C 
-tc_4 = tc(ipcon, "23jX", typ='N') #D
-tc_5 = tc(ipcon, "WpL", typ='N') #E 
-tc_6 = tc(ipcon, "WQC", typ='N') #F 
-tc_7 = tc(ipcon, "WQY", typ='N') #G
-tc_8 = tc(ipcon, "WPK", typ='N') #H
+tc_1 = tc(ipcon, config['REACTOR']['Tc'][0], typ='N') #A 
+tc_2 = tc(ipcon, config['REACTOR']['Tc'][1], typ='N') #B 
+tc_3 = tc(ipcon, config['REACTOR']['Tc'][2], typ='N') #C 
+tc_4 = tc(ipcon, config['REACTOR']['Tc'][3], typ='N') #D
+tc_5 = tc(ipcon, config['REACTOR']['Tc'][4], typ='N') #E 
+tc_6 = tc(ipcon, config['REACTOR']['Tc'][5], typ='N') #F 
+tc_7 = tc(ipcon, config['REACTOR']['Tc'][6], typ='N') #G
+tc_8 = tc(ipcon, config['REACTOR']['Tc'][7], typ='N') #H
 
 
-tc_9 = tc(ipcon, "WPP", typ='N') #1
-tc_10= tc(ipcon, "WQ3", typ='N') #2
-tc_11 = tc(ipcon, "WQh", typ='N') #3
+tc_9 = tc(ipcon,config['REACTOR']['TcExtra'][0], typ='N') #1
+tc_10= tc(ipcon,config['REACTOR']['TcExtra'][1], typ='N') #2
+tc_11 = tc(ipcon,config['REACTOR']['TcExtra'][2], typ='N') #3
 tc_list = {'T1':tc_1,'T2':tc_2,'T3':tc_3,'T4':tc_4,'T5':tc_5,'T6':tc_6,'T7':tc_7,'T8':tc_8, 'M1':tc_9, 'M2':tc_10, 'M3':tc_11}
 
-ido_1 = BrickletIndustrialDigitalOut4V2("TpP", ipcon)
-ido_2 = BrickletIndustrialDigitalOut4V2("Tq2", ipcon)
-ido_3 = BrickletIndustrialDigitalOut4V2("ToX", ipcon)
+ido_1 = BrickletIndustrialDigitalOut4V2(config['REACTOR']['DigitalOut'][0], ipcon)
+ido_2 = BrickletIndustrialDigitalOut4V2(config['REACTOR']['DigitalOut'][1], ipcon)
 p_val = 0.018
 i_val = 0.000013
 

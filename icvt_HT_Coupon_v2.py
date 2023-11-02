@@ -20,7 +20,11 @@ def tk_loop():
         section_name.configure(text = str(config['TIMING']['Section'][section]))
         for i in set_T:
             set_T[i].delete(0, tk.END)
-            set_T[i].insert(0,str("{0:.2f}").format(T_set[i]))
+            if i >3:
+                set_T[i].insert(0,str("{0:.2f}").format(T_set[i-4]))
+            else : 
+                set_T[i].insert(0,str("{0:.2f}").format(T_set[i]))
+
             #set_T[i].set(str(T_set[i]))
         for i in set_MFC:
             set_MFC[i].delete(0, tk.END)
@@ -32,25 +36,7 @@ def tk_loop():
         if (t_end < 0):  
             Stop_Button_callback()  
     
-    if running_setFunction == 1:     
-        T_set, MFC_set,t_end, Verdampfer_set = set_function(t0)    
-        lable_timer.configure(text = str("{0:.2f}").format(t_end/60)+" min")
-        for i in set_T:
-            set_T[i].delete(0, tk.END)
-            set_T[i].insert(0,str("{0:.2f}").format(T_set[i]))
-            
-            #set_T[i].set(str(T_set[i]))
-        for i in set_MFC:
-            set_MFC[i].delete(0, tk.END)
-            set_MFC[i].insert(0,str(MFC_set[i]))    
-
-        set_Verdampfer.delete(0, tk.END)
-        set_Verdampfer.insert(0,str(Verdampfer_set)) 
-        getdata()           
-        if (t_end < 0):
-            Stop_Button_callback()
-
-            
+               
     #for i in lable_T_ist:
     for tc_obj_name in tc_list:
         lable_T_ist[tc_obj_name].configure(text = str(tc_list[tc_obj_name].t)+" °C")
@@ -86,19 +72,30 @@ def tk_loop():
         line += str(set_MFC[0].get()) + ' \t '+ str(MFC_N2.Voltage) + ' \t '
         line += str(set_MFC[1].get()) + ' \t '+ str(MFC_Air.Voltage) + ' \t '
         line += str(set_MFC[2].get()) + ' \t '+ str(MFC_Ethan.Voltage) + ' \t '
-        line += str(pressure1.Voltage) + ' \t '
-        line += str(pressure2.Voltage) + ' \t '
+        #line += str(pressure1.Voltage) + ' \t '
+        #line += str(pressure2.Voltage) + ' \t '
+        line += str(0) + ' \t '
+        line += str(0) + ' \t '
         line += ' \n'
         f.writelines(line)
 
-    patrone_1.regeln()
-    patrone_2.regeln()
-    patrone_3.regeln()
-    patrone_4.regeln()
-    patrone_5.regeln()
-    patrone_6.regeln()
-    patrone_7.regeln()
-    patrone_8.regeln()
+    patrone_R1_1.regeln()
+    patrone_R1_2.regeln()
+    patrone_R1_3.regeln()
+    patrone_R1_4.regeln()
+    patrone_R1_5.regeln()
+    patrone_R1_6.regeln()
+    patrone_R1_7.regeln()
+    patrone_R1_8.regeln()
+    
+    patrone_R2_1.regeln()
+    patrone_R2_2.regeln()
+    patrone_R2_3.regeln()
+    patrone_R2_4.regeln()
+    patrone_R2_5.regeln()
+    patrone_R2_6.regeln()
+    patrone_R2_7.regeln()
+    patrone_R2_8.regeln()
 
     #T_set, MFC_set = security_functions(T_set, MFC_set)
 
@@ -107,21 +104,40 @@ def tk_loop():
 def getdata():    
 
     if set_T[0].get() != '':
-        patrone_1.set_t_soll(float(set_T[0].get()))
+        patrone_R1_1.set_t_soll(float(set_T[0].get()))
     if set_T[1].get() != '':
-        patrone_2.set_t_soll(float(set_T[1].get()))
+        patrone_R1_2.set_t_soll(float(set_T[1].get()))
     if set_T[2].get() != '':
-        patrone_3.set_t_soll(float(set_T[2].get()))
+        patrone_R1_3.set_t_soll(float(set_T[2].get()))
     if set_T[3].get() != '':
-        patrone_4.set_t_soll(float(set_T[3].get()))
+        patrone_R1_4.set_t_soll(float(set_T[3].get()))
     if set_T[0].get() != '':
-        patrone_5.set_t_soll(float(set_T[0].get()))
+        patrone_R1_5.set_t_soll(float(set_T[0].get()))
     if set_T[1].get() != '':
-        patrone_6.set_t_soll(float(set_T[1].get()))
+        patrone_R1_6.set_t_soll(float(set_T[1].get()))
     if set_T[2].get() != '':
-        patrone_7.set_t_soll(float(set_T[2].get()))
+        patrone_R1_7.set_t_soll(float(set_T[2].get()))
     if set_T[3].get() != '':
-        patrone_8.set_t_soll(float(set_T[3].get()))
+        patrone_R1_8.set_t_soll(float(set_T[3].get()))
+          
+
+    if set_T[0].get() != '':
+        patrone_R2_1.set_t_soll(float(set_T[0].get()))
+    if set_T[1].get() != '':
+        patrone_R2_2.set_t_soll(float(set_T[1].get()))
+    if set_T[2].get() != '':
+        patrone_R2_3.set_t_soll(float(set_T[2].get()))
+    if set_T[3].get() != '':
+        patrone_R2_4.set_t_soll(float(set_T[3].get()))
+    if set_T[0].get() != '':
+        patrone_R2_5.set_t_soll(float(set_T[0].get()))
+    if set_T[1].get() != '':
+        patrone_R2_6.set_t_soll(float(set_T[1].get()))
+    if set_T[2].get() != '':
+        patrone_R2_7.set_t_soll(float(set_T[2].get()))
+    if set_T[3].get() != '':
+        patrone_R2_8.set_t_soll(float(set_T[3].get()))
+
 
 
     MFC_N2.set(int(set_MFC[0].get()))
@@ -138,13 +154,7 @@ def Start_Button_callback():
     t_calc  = time.time()
     t_section = time.time()
     Start_Button.configure(state = "disabled", fg_color = 'red')
-    Heating_Button.configure(state = "disabled")
-    Heating450_Button.configure(state = "disabled")
-    Coking_Button.configure(state = "disabled")
-    Cooling_Button.configure(state = "disabled")
-    Cooling450_Button.configure(state = "disabled")
-    Decoking_Button.configure(state = "disabled")
-    SteamTreatment_Button.configure(state = "disabled")
+   
 
 
 def Stop_Button_callback():
@@ -153,113 +163,7 @@ def Stop_Button_callback():
     running_setFunction = 0
     Start_Button.configure(state = "enabled", fg_color = 'blue')
     lable_timer.configure(text = str("{0:.2f}").format(0)+" min")
-    Heating_Button.configure(state = "enabled", fg_color = 'blue')
-    Heating450_Button.configure(state = "enabled", fg_color = 'blue')
-    Coking_Button.configure(state = "enabled", fg_color = 'blue')
-    Cooling_Button.configure(state = "enabled", fg_color = 'blue')
-    Cooling450_Button.configure(state = "enabled", fg_color = 'blue')
-    Decoking_Button.configure(state = "enabled", fg_color = 'blue')
-    SteamTreatment_Button.configure(state = "enabled", fg_color = 'blue')
-
-def Heating_Button_callback():
-    global t0, set_function, running_setFunction
-    t0 = time.time()
-    running_setFunction = 1
-    set_function = heating
-    Start_Button.configure(state = "disabled")
-    Heating_Button.configure(state = "disabled", fg_color = 'red')
-    Heating450_Button.configure(state = "disabled")
-    Coking_Button.configure(state = "disabled")
-    Cooling_Button.configure(state = "disabled")
-    Cooling450_Button.configure(state = "disabled")
-    Decoking_Button.configure(state = "disabled")
-    SteamTreatment_Button.configure(state = "disabled")
-
-def Heating450_Button_callback():
-    global t0, set_function, running_setFunction
-    t0 = time.time()
-    running_setFunction = 1
-    set_function = heating_450
-    Start_Button.configure(state = "disabled")
-    Heating_Button.configure(state = "disabled")
-    Heating450_Button.configure(state = "disabled", fg_color = 'red')
-    Coking_Button.configure(state = "disabled")
-    Cooling_Button.configure(state = "disabled")
-    Cooling450_Button.configure(state = "disabled")
-    Decoking_Button.configure(state = "disabled")
-    SteamTreatment_Button.configure(state = "disabled")
-
-def Coking_Button_callback():
-    global t0, set_function, running_setFunction
-    t0 = time.time()
-    running_setFunction = 1
-    set_function = Coking
-    Start_Button.configure(state = "disabled")
-    Heating_Button.configure(state = "disabled")
-    Heating450_Button.configure(state = "disabled")
-    Coking_Button.configure(state = "disabled", fg_color = 'red')
-    Cooling_Button.configure(state = "disabled")
-    Cooling450_Button.configure(state = "disabled")
-    Decoking_Button.configure(state = "disabled")
-    SteamTreatment_Button.configure(state = "disabled")
-
-def Cooling_Button_callback():
-    global t0, set_function, running_setFunction
-    t0 = time.time()
-    running_setFunction = 1
-    set_function = Cooling
-    Start_Button.configure(state = "disabled")
-    Heating_Button.configure(state = "disabled")
-    Heating450_Button.configure(state = "disabled")
-    Coking_Button.configure(state = "disabled")
-    Cooling_Button.configure(state = "disabled", fg_color = 'red')
-    Cooling450_Button.configure(state = "disabled")
-    Decoking_Button.configure(state = "disabled")
-    SteamTreatment_Button.configure(state = "disabled")
-
-
-def Cooling450_Button_callback():
-    global t0, set_function, running_setFunction
-    t0 = time.time()
-    running_setFunction = 1
-    set_function = Cooling_450
-    Start_Button.configure(state = "disabled")
-    Heating_Button.configure(state = "disabled")
-    Heating450_Button.configure(state = "disabled")
-    Coking_Button.configure(state = "disabled")
-    Cooling_Button.configure(state = "disabled")
-    Cooling450_Button.configure(state = "disabled", fg_color = 'red')
-    Decoking_Button.configure(state = "disabled")
-    SteamTreatment_Button.configure(state = "disabled")
-
-def Decoking_Button_callback():
-    global t0, set_function, running_setFunction
-    t0 = time.time()
-    running_setFunction = 1
-    set_function = Decoking
-    Start_Button.configure(state = "disabled")
-    Heating_Button.configure(state = "disabled")
-    Heating450_Button.configure(state = "disabled")
-    Coking_Button.configure(state = "disabled")
-    Cooling_Button.configure(state = "disabled")
-    Cooling450_Button.configure(state = "disabled")
-    Decoking_Button.configure(state = "disabled", fg_color = 'red')
-    SteamTreatment_Button.configure(state = "disabled")
-
-def SteamTreatment_Button_callback():
-    global t0, set_function, running_setFunction
-    t0 = time.time()
-    running_setFunction = 1
-    set_function = SteamTreatment
-    Start_Button.configure(state = "disabled")
-    Heating_Button.configure(state = "disabled")
-    Heating450_Button.configure(state = "disabled")
-    Coking_Button.configure(state = "disabled")
-    Cooling_Button.configure(state = "disabled")
-    Cooling450_Button.configure(state = "disabled")
-    Decoking_Button.configure(state = "disabled")
-    SteamTreatment_Button.configure(state = "disabled", fg_color = 'red')
-
+   
 
 '''' 
 ====================================
@@ -288,12 +192,12 @@ argparser.add_argument(
 
 json_name = str(argparser.parse_args().experiment)
 if json_name == "None":
-    json_name="20231021_3Cycling_28.20"
+    json_name="20230921_parallelReactorTest"
 
 filename = json_name + ".dat"
-#filename = "Test.dat"
+filename = "Test.dat"
 with open(filename, 'a') as f:
-    headline = "time \t t1 \t t2 \t t3 \t t4 \t t5 \t t6 \t t7 \t t8 \t M1 \t M2 \t M3 \t p1 \t p2 \t p3 \t p4 \t p5 \t p6 \t p7 \t p8  \t MFC_N2_soll \t MFC_N2_ist \t MFC_Air_soll \t MFC_Air_ist \t MFC_Ethan_soll \t MFC_Ethan_ist \t Druck1  \t Druck2 \n"
+    headline = "time \t T_R1_1 \t T_R1_2 \t T_R1_3 \t T_R1_4 \t T_R1_5 \t T_R1_6 \t T_R1_7 \t T_R1_8 \t T_R2_1 \t T_R2_2 \t T_R2_3 \t T_R2_4 \t T_R2_5 \t T_R2_6 \t T_R2_7 \t T_R2_8 \t M1 \t M2 \t M3 \t p_R1_1 \t p_R1_2 \t p_R1_3 \t p_R1_4 \t p_R1_5 \t p_R1_6 \t p_R1_7 \t p_R1_8 \t p_R2_1 \t p_R2_2 \t p_R2_3 \t p_R2_4 \t p_R2_5 \t p_R2_6 \t p_R2_7 \t p_R2_8  \t MFC_N2_soll \t MFC_N2_ist \t MFC_Air_soll \t MFC_Air_ist \t MFC_Ethan_soll \t MFC_Ethan_ist \t Druck1  \t Druck2 \n"
     f.writelines(headline)
 '''
 ====================================
@@ -316,64 +220,109 @@ ipcon.connect(HOST, PORT) # Connect to brickd
 Relay1 = BrickletIndustrialDualRelay("Zt2", ipcon)
 
 
-tc_1 = tc(ipcon, "WR8", typ='N') #A 
-tc_2 = tc(ipcon, "WQp", typ='N') #B 
-tc_3 = tc(ipcon, "WPM", typ='N') #C 
-tc_4 = tc(ipcon, "23jX", typ='N') #D
-tc_5 = tc(ipcon, "WpL", typ='N') #E 
-tc_6 = tc(ipcon, "WQC", typ='N') #F 
-tc_7 = tc(ipcon, "WQY", typ='N') #G
-tc_8 = tc(ipcon, "WPK", typ='N') #H
+tc_R1_1 = tc(ipcon, "WR8", typ='N') #A 
+tc_R1_2 = tc(ipcon, "WQp", typ='N') #B 
+tc_R1_3 = tc(ipcon, "WPM", typ='N') #C 
+tc_R1_4 = tc(ipcon, "23jX", typ='N') #D
+tc_R1_5 = tc(ipcon, "WpL", typ='N') #E 
+tc_R1_6 = tc(ipcon, "WQC", typ='N') #F 
+tc_R1_7 = tc(ipcon, "WQY", typ='N') #G
+tc_R1_8 = tc(ipcon, "WPK", typ='N') #H
+
+tc_R2_1 = tc(ipcon, "WPP", typ='N') #A 
+tc_R2_2 = tc(ipcon, "WQ3", typ='N') #B 
+tc_R2_3 = tc(ipcon, "23jQ", typ='N') #C 
+tc_R2_4 = tc(ipcon, "26WH", typ='N') #D
+tc_R2_5 = tc(ipcon, "WQh", typ='N') #E 
+tc_R2_6 = tc(ipcon, "23jP", typ='N') #F 
+tc_R2_7 = tc(ipcon, "23iy", typ='N') #G
+tc_R2_8 = tc(ipcon, "23ja", typ='N') #H
 
 
-tc_9 = tc(ipcon, "WPP", typ='N') #1
-tc_10= tc(ipcon, "WQ3", typ='N') #2
-tc_11 = tc(ipcon, "WQh", typ='N') #3
-tc_list = {'T1':tc_1,'T2':tc_2,'T3':tc_3,'T4':tc_4,'T5':tc_5,'T6':tc_6,'T7':tc_7,'T8':tc_8, 'M1':tc_9, 'M2':tc_10, 'M3':tc_11}
+tc_9 = tc(ipcon, "23hX", typ='N') #1
+tc_10= tc(ipcon, "WQT", typ='N') #2
+tc_11 = tc(ipcon, "WjR", typ='N') #3
+tc_list = {'T_R1_1':tc_R1_1,'T_R1_2':tc_R1_2,'T_R1_3':tc_R1_3,'T_R1_4':tc_R1_4,'T_R1_5':tc_R1_5,'T_R1_6':tc_R1_6,'T_R1_7':tc_R1_7,'T_R1_8':tc_R1_8,'T_R2_1':tc_R2_1,'T_R2_2':tc_R2_2,'T_R2_3':tc_R2_3,'T_R2_4':tc_R2_4,'T_R2_5':tc_R2_5,'T_R2_6':tc_R2_6,'T_R2_7':tc_R2_7,'T_R2_8':tc_R2_8, 'M1':tc_9, 'M2':tc_10, 'M3':tc_11}
 
 ido_1 = BrickletIndustrialDigitalOut4V2("TpP", ipcon)
 ido_2 = BrickletIndustrialDigitalOut4V2("Tq2", ipcon)
 ido_3 = BrickletIndustrialDigitalOut4V2("ToX", ipcon)
+
+ido_4 = BrickletIndustrialDigitalOut4V2("Tmw", ipcon)
+ido_5 = BrickletIndustrialDigitalOut4V2("TnQ", ipcon)
 p_val = 0.018
 i_val = 0.000013
 
-patrone_1 = regler(ido_1,0,tc_1)
-patrone_1.config(i_val, p_val)
-patrone_1.start(-300)
+patrone_R1_1 = regler(ido_1,0,tc_R1_1)
+patrone_R1_1.config(i_val, p_val)
+patrone_R1_1.start(-300)
 
-patrone_2 = regler(ido_1,1,tc_2)
-patrone_2.config(i_val, p_val)
-patrone_2.start(-300)
+patrone_R1_2 = regler(ido_1,1,tc_R1_2)
+patrone_R1_2.config(i_val, p_val)
+patrone_R1_2.start(-300)
 
-patrone_3 = regler(ido_1,2,tc_3)
-patrone_3.config(i_val, p_val)
-patrone_3.start(-300)
+patrone_R1_3 = regler(ido_1,2,tc_R1_3)
+patrone_R1_3.config(i_val, p_val)
+patrone_R1_3.start(-300)
 
-patrone_4 = regler(ido_1,3,tc_4)
-patrone_4.config(i_val, p_val)
-patrone_4.start(-300)
+patrone_R1_4 = regler(ido_1,3,tc_R1_4)
+patrone_R1_4.config(i_val, p_val)
+patrone_R1_4.start(-300)
 
-patrone_5 = regler(ido_2,0,tc_5)
-patrone_5.config(i_val, p_val)
-patrone_5.start(-300)
+patrone_R1_5 = regler(ido_2,0,tc_R1_5)
+patrone_R1_5.config(i_val, p_val)
+patrone_R1_5.start(-300)
 
-patrone_6 = regler(ido_2,1,tc_6)
-patrone_6.config(i_val, p_val)
-patrone_6.start(-300)
+patrone_R1_6 = regler(ido_2,1,tc_R1_6)
+patrone_R1_6.config(i_val, p_val)
+patrone_R1_6.start(-300)
 
-patrone_7 = regler(ido_2,2,tc_7)
-patrone_7.config(i_val, p_val)
-patrone_7.start(-300)
+patrone_R1_7 = regler(ido_2,2,tc_R1_7)
+patrone_R1_7.config(i_val, p_val)
+patrone_R1_7.start(-300)
 
-patrone_8 = regler(ido_2,3,tc_8)
-patrone_8.config(i_val, p_val)
-patrone_8.start(-300)
-
-patronen_list = {'p1':patrone_1,'p2':patrone_2,'p3':patrone_3,'p4':patrone_4,'p5':patrone_5,'p6':patrone_6,'p7':patrone_7,'p8':patrone_8}
+patrone_R1_8 = regler(ido_2,3,tc_R1_8)
+patrone_R1_8.config(i_val, p_val)
+patrone_R1_8.start(-300)
 
 
-option = ['T1','T2','T3','T4','T5','T6','T7','T8','M1','M2','M3']
-option_Heat = ['p1','p2','p3','p4','p5','p6','p7','p8']
+patrone_R2_1 = regler(ido_4,0,tc_R2_1)
+patrone_R2_1.config(i_val, p_val)
+patrone_R2_1.start(-300)
+
+patrone_R2_2 = regler(ido_4,1,tc_R2_2)
+patrone_R2_2.config(i_val, p_val)
+patrone_R2_2.start(-300)
+
+patrone_R2_3 = regler(ido_4,2,tc_R2_3)
+patrone_R2_3.config(i_val, p_val)
+patrone_R2_3.start(-300)
+
+patrone_R2_4 = regler(ido_4,3,tc_R2_4)
+patrone_R2_4.config(i_val, p_val)
+patrone_R2_4.start(-300)
+
+patrone_R2_5 = regler(ido_5,0,tc_R2_5)
+patrone_R2_5.config(i_val, p_val)
+patrone_R2_5.start(-300)
+
+patrone_R2_6 = regler(ido_5,1,tc_R2_6)
+patrone_R2_6.config(i_val, p_val)
+patrone_R2_6.start(-300)
+
+patrone_R2_7 = regler(ido_5,2,tc_R2_7)
+patrone_R2_7.config(i_val, p_val)
+patrone_R2_7.start(-300)
+
+patrone_R2_8 = regler(ido_5,3,tc_R2_8)
+patrone_R2_8.config(i_val, p_val)
+patrone_R2_8.start(-300)
+
+patronen_list = {'p_R1_1':patrone_R1_1,'p_R1_2':patrone_R1_2,'p_R1_3':patrone_R1_3,'p_R1_4':patrone_R1_4,'p_R1_5':patrone_R1_5,'p_R1_6':patrone_R1_6,'p_R1_7':patrone_R1_7,'p_R1_8':patrone_R1_8,'p_R2_1':patrone_R2_1,'p_R2_2':patrone_R2_2,'p_R2_3':patrone_R2_3,'p_R2_4':patrone_R2_4,'p_R2_5':patrone_R2_5,'p_R2_6':patrone_R2_6,'p_R2_7':patrone_R2_7,'p_R2_8':patrone_R2_8}
+
+
+option = ['T_R1_1','T_R1_2','T_R1_3','T_R1_4','T_R1_5','T_R1_6','T_R1_7','T_R1_8','T_R2_1','T_R2_2','T_R2_3','T_R2_4','T_R2_5','T_R2_6','T_R2_7','T_R2_8','M1','M2','M3']
+option_Heat = ['p_R1_1','p_R1_2','p_R1_3','p_R1_4','p_R1_5','p_R1_6','p_R1_7','p_R1_8','p_R2_1','p_R2_2','p_R2_3','p_R2_4','p_R2_5','p_R2_6','p_R2_7','p_R2_8']
 
 
 window = ctk.CTk()
@@ -382,7 +331,7 @@ scrW = window.winfo_screenwidth()
 scrH = window.winfo_screenheight()
 window.geometry(str(scrW) + "x" + str(scrH))
 window.title(config['REACTOR']['Name'])
-window.configure(bg= config['TKINTER']['background-color'])
+window.configure(bg= img['TKINTER']['background-color'])
 window.attributes('-fullscreen',True)
 
 #----------- Images ----------- 
@@ -393,13 +342,13 @@ bg_image = ctk.CTkImage(Image.open(img['Background']['name']),size=(int(img['Bac
 
 
 #----------- Frames ----------
-lf_MFC = ctk.CTkFrame(window, border_color=config['TKINTER']['background-color'], border_width=0, height=scrH, width=scrW)
+lf_MFC = ctk.CTkFrame(window, border_color=img['TKINTER']['background-color'], border_width=0, height=scrH, width=scrW)
 name_Frame = ctk.CTkLabel(lf_MFC, font = ('Arial',16), text='MFC Steuerung')
 name_Frame.grid(column=0, columnspan = 2, row=0, ipadx=5, ipady=5)
 lf_MFC.place(x= 50,y= 800)
 
 
-LF_Verdampfer = ctk.CTkFrame(window, border_color=config['TKINTER']['background-color'], border_width=0, height=scrH, width=scrW)
+LF_Verdampfer = ctk.CTkFrame(window, border_color=img['TKINTER']['background-color'], border_width=0, height=scrH, width=scrW)
 Verdampfer_Frame = ctk.CTkLabel(LF_Verdampfer, font = ('Arial',16), text='Verdampfer Steuerung')
 Verdampfer_Frame.grid(column=0, columnspan = 2, row=0, ipadx=5, ipady=5)
 LF_Verdampfer.place(x= 50,y= 400)
@@ -448,7 +397,7 @@ for num, i in enumerate(option_Heat):
     progressbar[i] .place(x = x_offset + img['T-Reaktor']['x'][num]-8,y = y_offset + img['T-Reaktor']['y'][num]+30)
 
 set_T ={}
-for i in range(0,4):
+for i in range(0,8):
     set_T[i] = tk.Entry(window, font = ('Arial',16), width = 6,bg='light blue' )
     set_T[i].place(x = x_offset + img['T-Set']['x'][i],y = y_offset + img['T-Set']['y'][i])
 
@@ -479,21 +428,6 @@ Stop_Button = ctk.CTkButton(master=lf_control, command=Stop_Button_callback,text
 Stop_Button.grid(column=2, row=0, padx=10, pady = 8)
 Start_Button = ctk.CTkButton(master=lf_control, command=Start_Button_callback,text="JSON starten", font = ('Arial',16),fg_color = 'blue')
 Start_Button.grid(column=2, row=1, padx=10, pady = 8)
-Heating_Button = ctk.CTkButton(master=lf_control, command=Heating_Button_callback,text="Heating", font = ('Arial',16),fg_color = 'blue')
-Heating_Button.grid(column=2, row=2, pady = 8)
-Heating450_Button = ctk.CTkButton(master=lf_control, command=Heating450_Button_callback,text="Heating 450 °C", font = ('Arial',16),fg_color = 'blue')
-Heating450_Button.grid(column=3, row=2, pady = 8)
-Coking_Button = ctk.CTkButton(master=lf_control, command=Coking_Button_callback,text="Coking", font = ('Arial',16),fg_color = 'blue')
-Coking_Button.grid(column=2, row=3, pady = 8)
-Cooling_Button = ctk.CTkButton(master=lf_control, command=Cooling_Button_callback,text="Cooling", font = ('Arial',16),fg_color = 'blue')
-Cooling_Button.grid(column=2, row=4, pady = 8)
-Cooling450_Button = ctk.CTkButton(master=lf_control, command=Cooling450_Button_callback,text="Cooling 450°C", font = ('Arial',16),fg_color = 'blue')
-Cooling450_Button.grid(column=3, row=4, pady = 8)
-Decoking_Button = ctk.CTkButton(master=lf_control, command=Decoking_Button_callback,text="Decoking", font = ('Arial',16),fg_color = 'blue')
-Decoking_Button.grid(column=2, row=5, pady = 8)
-SteamTreatment_Button = ctk.CTkButton(master=lf_control, command=SteamTreatment_Button_callback,text="SteamTreatment", font = ('Arial',16),fg_color = 'blue')
-SteamTreatment_Button.grid(column=2, row=6, pady = 8)
-
 
 Exit_Button = ctk.CTkButton(master=window,text="", command=window.destroy, fg_color= 'transparent',  hover_color='#F2F2F2', image= close_img)
 Exit_Button.place(x=700, y=50)
@@ -531,7 +465,7 @@ Verdampfer = MFC(ipcon, "TiX",MFCDual2,1)
     
 pressureDual = TF_IndustrialDualAnalogIn(ipcon, "23UE")
 pressure1 = pressure(pressureDual,0)
-pressure2 = pressure(pressureDual,1)
+pressure2 = pressure(pressureDual,1) 
 
 
 window.after(1000, tk_loop())
@@ -539,14 +473,25 @@ window.mainloop()
 
 print("shutting down...")
 
-patrone_1.stop()
-patrone_2.stop()
-patrone_3.stop()
-patrone_4.stop()
-patrone_5.stop()
-patrone_6.stop()
-patrone_7.stop()
-patrone_8.stop()
+patrone_R1_1.stop()
+patrone_R1_2.stop()
+patrone_R1_3.stop()
+patrone_R1_4.stop()
+patrone_R1_5.stop()
+patrone_R1_6.stop()
+patrone_R1_7.stop()
+patrone_R1_8.stop()
+
+patrone_R2_1.stop()
+patrone_R2_2.stop()
+patrone_R2_3.stop()
+patrone_R2_4.stop()
+patrone_R2_5.stop()
+patrone_R2_6.stop()
+patrone_R2_7.stop()
+patrone_R2_8.stop()
+
+
 MFC_N2.stop()
 MFC_Air.stop()
 MFC_Ethan.stop()
