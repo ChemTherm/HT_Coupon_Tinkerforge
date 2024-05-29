@@ -1,0 +1,9 @@
+tinkerforge
+customtkinter
+matplotlib
+tkinter
+time
+argparse
+json
+PIL 
+datetime 

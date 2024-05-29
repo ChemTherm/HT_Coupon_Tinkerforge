@@ -1,0 +1,33 @@
+{
+    
+    "TKINTER":{
+        "Name": "MFC Steuerung",
+        "background-color": "#F2F2F2",
+        "border-color": "#000000",
+        "tabpadx": 50,
+        "font-size": 22
+    },
+    "Background":{
+        "name": "./img/Hintergrund.png",
+        "width": 1280,
+        "height": 720,
+        "x": 0,
+        "y": 0
+    },
+    "Close":{
+        "name": "./img/close.png",
+        "width": 50,
+        "height": 50,
+        "factor": 1,
+        "x": 1130,
+        "y": 30
+        
+    },  
+        
+    "PATH":{
+        "SaveFile": "./Daten/KombiVerdampfer_Gross_TP1/ExcelMessung4.dat",
+        "images": "./img/"
+    }
+    
+    
+}

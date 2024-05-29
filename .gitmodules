@@ -1,0 +1,6 @@
+[submodule "TinkerForgeHelperLib"]
+	path = TinkerForgeHelperLib
+	url = https://github.com/ChemTherm/TinkerForgeHelperLib
+[submodule "TKinter_HelperLib"]
+	path = TKinter_HelperLib
+	url = https://github.com/ChemTherm/TKinter_HelperLib
