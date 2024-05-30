@@ -1,5 +1,11 @@
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
 from TinkerForgeHelperLib.tinkerforge_lib import TFH
 from TKinter_HelperLib.tkinter_lib import *
+from utilities.regler import *
 from time import sleep
 
 
@@ -14,7 +20,8 @@ def main():
     tk_obj = create_entries(tk_obj, tfh_obj)    
     tk_obj = create_labels(tk_obj, tfh_obj)
     tk_obj = create_buttons(tk_obj, tfh_obj)
-    
+    tk_obj = setup_controller(tk_obj, tfh_obj)
+
     tk_loopNew(tk_obj, tfh_obj)  
     
     tk_obj.mainloop()
