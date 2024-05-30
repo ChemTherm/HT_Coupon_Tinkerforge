@@ -4,3 +4,6 @@
 [submodule "TKinter_HelperLib"]
 	path = TKinter_HelperLib
 	url = https://github.com/ChemTherm/TKinter_HelperLib
+[submodule "utilities"]
+	path = utilities
+	url = https://github.com/ChemTherm/utilities
