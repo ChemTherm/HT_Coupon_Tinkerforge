@@ -8,19 +8,19 @@
         "font-size": 22
     },
     "Background":{
-        "name": "./img/Hintergrund.png",
-        "width": 1280,
-        "height": 720,
-        "x": 0,
-        "y": 0
+        "name": "./img/Background1Reactor.png",
+        "width": 624,
+        "height": 862,
+        "x": 600,
+        "y": 100
     },
     "Close":{
         "name": "./img/close.png",
         "width": 50,
         "height": 50,
         "factor": 1,
-        "x": 1130,
-        "y": 30
+        "x": 700,
+        "y": 50
         
     },  
         

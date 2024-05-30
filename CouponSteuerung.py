@@ -7,16 +7,17 @@ from time import sleep
 def main():
     json_GUI = "GUI_settings"
 
-    tfh_obj = TFH("localhost", 4223, debug_mode = 1)
+    tfh_obj = TFH("localhost", 4223)
     
-    window, frames, config = setup_gui(json_GUI)
+    tk_obj = setup_gui(json_GUI)
 
-    entries = create_entries(tfh_obj, frames)    
-    labels = create_labels(tfh_obj, frames, config)
+    tk_obj = create_entries(tk_obj, tfh_obj)    
+    tk_obj = create_labels(tk_obj, tfh_obj)
+    tk_obj = create_buttons(tk_obj, tfh_obj)
     
-    tk_loopNew(window, tfh_obj, labels, entries)  
+    tk_loopNew(tk_obj, tfh_obj)  
     
-    window.mainloop()
+    tk_obj.mainloop()
     print("shutting down...")
     time.sleep(2)
     tfh_obj.cleanup()
